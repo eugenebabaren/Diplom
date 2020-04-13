@@ -43,10 +43,14 @@ body {
     margin-right: 0px;
 }
 
-
 #btn_filtration {
     min-width: 174.98px;
     min-height: 45.88px;
+}
+
+#card-img img {
+    width: 100px;
+    height:100px;
 }
 
 
