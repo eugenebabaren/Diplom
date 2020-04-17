@@ -43,15 +43,40 @@ body {
     margin-right: 0px;
 }
 
+.lower-element {
+    color: black;
+}
+
+.cat-nested-btn {
+    color: white;
+}
+
+.dropdown-ul {
+    /* column-count: 2;
+    column-gap: 2rem; */
+    list-style: none;
+}
+
+#without-filt {
+    text-align: center;
+}
+
 #btn_filtration {
     min-width: 174.98px;
     min-height: 45.88px;
+    background-color: green;
 }
 
 #card-img img {
     width: 100px;
-    height:100px;
+    height: 100px;
 }
+
+#btn_all_cat {
+    color: white;
+}
+
+
 
 
 /* MEDIA */

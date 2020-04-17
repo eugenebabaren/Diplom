@@ -1,3 +1,5 @@
 $(document).ready(function () {
-    $('.treeview-colorful').mdbTreeview();
+
+    $('.treeview-animated').mdbTreeview();
+    
 });

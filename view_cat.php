@@ -1,6 +1,10 @@
 <?php
 
 include("include/db_connect.php");
+include("functions/functions.php");
+
+$cat = clearString($_GET["cat"]);
+$type = clearString($_GET["type"]);
 
 include("include/sorting.php");
 
@@ -100,8 +104,10 @@ include("include/sorting.php");
       <div class="treeview-animated ml-2">
 
         <h4 class="pt-2 pl-3">Категории</h4>
+
         <hr>
-        <ul class="treeview-animated-list mb-3">
+
+        <ul class="treeview-animated-list mb-2">
 
           <li class="treeview-animated-items">
             <a class="closed">
@@ -130,7 +136,7 @@ include("include/sorting.php");
                   echo '
                   <a href="view_cat.php?cat=' . strtolower($row["brand"]) . '&type=' . $row["type"] . '">
                     <li>
-                      <div class="lower-element treeview-animated-element"><i class="ic-w mr-1"></i>' . $row["brand"] . '
+                      <div class="lower-element treeview-animated-element"><i class="ic-w mr-1"></i>' . $row["brand"] . '</div>
                     </li>
                   </a>
                   ';
@@ -153,7 +159,6 @@ include("include/sorting.php");
                   Все хлопья
                 </button>
               </a>
-
 
               <?php
 
@@ -178,6 +183,12 @@ include("include/sorting.php");
               ?>
             </ul>
           </li>
+
+          <a id="btn_all_cat" href="index.php">
+            <button type="button" class="btn btn-success mt-2">
+              Все категории
+            </button>
+          </a>
         </ul>
       </div>
     </div>
@@ -194,54 +205,73 @@ include("include/sorting.php");
 
           <!-- FILTRATION -->
           <button id="btn_filtration" class="btn btn-success dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Фильтрация</button>
+
           <div class="dropdown-menu">
-            <a class="dropdown-item">
-              <!-- Default unchecked -->
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox1">
-                <label class="custom-control-label" for="checkbox1">Granarolo</label>
-              </div>
-            </a>
-            <a class="dropdown-item" href="#">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox2" checked>
-                <label class="custom-control-label" for="checkbox2">Alpro</label>
-              </div>
-            </a>
-            <a class="dropdown-item" href="#">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox3">
-                <label class="custom-control-label" for="checkbox3">sdsdf</label>
-              </div>
-            </a>
+            <div class="container-fluid d-sm-flex ml-0">
+
+              <ul class="dropdown-ul pl-0 mb-0">
+                <h4 class="ml-4 mt-2">Бренд</h4>
+
+                <?php
+
+                $result = mysqli_query($link, "SELECT * FROM category WHERE type='drinks'");
+
+                if (mysqli_num_rows($result) > 0) {
+                  $row = mysqli_fetch_array($result);
+
+                  do {
+
+
+                    echo '
+                  <li>
+                    <a class="dropdown-item">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . $row["id"] . '">
+                        <label class="custom-control-label" for="checkbox' . $row["id"] . '">' . $row["brand"] . '</label>
+                      </div>
+                    </a>
+                  </li>
+                  ';
+                  } while ($row = mysqli_fetch_array($result));
+                }
+
+                ?>
+
+              </ul>
+
+              <ul class="dropdown-ul pl-4 mb-0">
+                <h4 class="ml-4 mt-2">Страна</h4>
+                <?php
+
+                $result = mysqli_query($link, "SELECT * FROM products");
+
+                if (mysqli_num_rows($result) > 0) {
+                  $row = mysqli_fetch_array($result);
+
+                  $checkbox_id = 999999;
+                  do {
+                    
+                    echo '
+                  <li>
+                    <a class="dropdown-item">
+                      <div class="custom-control custom-checkbox">
+                        <input type="checkbox" name="brand[]" value="' . ++$checkbox_id . '" class="custom-control-input" id="checkbox' . $checkbox_id . '">
+                        <label class="custom-control-label" for="checkbox' .  $checkbox_id . '">' . $row["country"] . '</label>
+                      </div>
+                    </a>
+                  </li>
+                  ';
+                  } while ($row = mysqli_fetch_array($result));
+                }
+
+                ?>
+              </ul>
+            </div>
+
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <a href="index.php" class="dropdown-item" href="#">Без фильтрации</a>
-            </a>
-          </div>
-          <div class="dropdown-menu">
-            <a class="dropdown-item">
-              <!-- Default unchecked -->
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox1">
-                <label class="custom-control-label" for="checkbox1">Granarolo</label>
-              </div>
-            </a>
-            <a class="dropdown-item" href="#">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox2" checked>
-                <label class="custom-control-label" for="checkbox2">Alpro</label>
-              </div>
-            </a>
-            <a class="dropdown-item" href="#">
-              <div class="custom-control custom-checkbox">
-                <input type="checkbox" class="custom-control-input" id="checkbox3">
-                <label class="custom-control-label" for="checkbox3">sdsdf</label>
-              </div>
-            </a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">
-              <a href="index.php" class="dropdown-item" href="#">Без фильтрации</a>
+
+            <a href="index.php">
+              <a href="index.php" class="dropdown-item" id="without-filt">Без фильтрации</a>
             </a>
           </div>
           <!-- FILTRATION -->
@@ -250,16 +280,23 @@ include("include/sorting.php");
           <!-- SORTING -->
           <div>
             <button class="btn btn-success dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Сортировка</button>
-            <div class="dropdown-menu">
-              <a href="index.php?sort=price-asc" class="dropdown-item" href="#">Сначала дешевле</a>
-              <a href="index.php?sort=price-desc" class="dropdown-item" href="#">Сначала дороже</a>
-              <a href="index.php?sort=popular" class="dropdown-item" href="#">Популярные</a>
-              <a href="index.php?sort=new" class="dropdown-item" href="#">По новизне</a>
-              <a href="index.php?sort=from-a-to-z" class="dropdown-item" href="#">От А до Я</a>
-              <a href="index.php?sort=from-z-to-a" class="dropdown-item" href="#">От Я до А</a>
-              <div class="dropdown-divider"></div>
-              <a href="index.php?sort=without-sorting" class="dropdown-item" href="#">Без сортировки</a>
-            </div>
+
+            <?php
+            echo '
+              <div class="dropdown-menu">
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=price-asc" class="dropdown-item">Сначала дешевле</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=price-desc" class="dropdown-item">Сначала дороже</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=popular" class="dropdown-item">Популярные</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=new" class="dropdown-item">По новизне</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=from-a-to-z" class="dropdown-item">От А до Я</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=from-z-to-a" class="dropdown-item">От Я до А</a>
+                <div class="dropdown-divider"></div>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=without-sorting" class="dropdown-item" href="#">Без сортировки</a>
+              </div>
+              ';
+            ?>
+
+
           </div>
           <!-- SORTING -->
 
@@ -288,7 +325,19 @@ include("include/sorting.php");
     <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
     <?php
 
-    $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' ORDER BY $sorting");
+    if (!empty($cat) && !empty($type)) {
+
+      $querycat = "AND brand='$cat' AND product_type='$type'";
+    } else {
+      if (!empty($type)) {
+        $querycat = "AND product_type='$type'";
+      } else {
+        $querycat = "";
+      }
+    }
+
+
+    $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $querycat ORDER BY $sorting");
 
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
