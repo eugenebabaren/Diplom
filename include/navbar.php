@@ -1,6 +1,10 @@
+<?php
+include("include/auth_cookie.php");
+?>
+
 <nav class="navbar fixed-top navbar-expand-lg navbar-light white scrolling-navbar">
     <div class="container-fluid">
-        <a href="index.php" class="navbar-brand mr-4"><img src="images/logo (7).svg" width="120vw" alt="logo"></a>
+        <a href="index.php" class="navbar-brand mr-4"><img src="images/logo.svg" width="120vw" alt="logo"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarContent" aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -40,9 +44,15 @@
                             <i class="fas fa-shopping-basket"></i>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#" class="nav-link border border-light rounded waves-effect">
-                            <b>ВХОД / РЕГИСТРАЦИЯ</b>
+                    <li class="nav-item mr-1">
+                        <a href="sign_in.php" id="sign_in_link" class="nav-link border border-light rounded waves-effect">
+                            <b id="sign_in_navbar_title_old" class="sign_in_navbar_title">ВХОД</b>
+                            <i id="sign_in_navbar_title_new" class="sign_in_navbar_title" hidden></i>
+                        </a>
+                    </li>
+                    <li id="reg_remove" class="nav-item">
+                        <a href="registration.php" class="nav-link border border-light rounded waves-effect">
+                            <b>РЕГИСТРАЦИЯ</b>
                         </a>
                     </li>
                 </ul>

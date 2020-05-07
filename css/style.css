@@ -57,8 +57,18 @@ body {
     list-style: none;
 }
 
-#without-filt {
+.without-filt {
     text-align: center;
+}
+
+.text-center {
+    width: 40%;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.remem_me_forgot_pass {
+    font-size: 1.1vw;
 }
 
 #btn_filtration {
@@ -75,6 +85,12 @@ body {
 #btn_all_cat {
     color: white;
 }
+
+#message-auth {
+    color: red;
+}
+
+
 
 
 

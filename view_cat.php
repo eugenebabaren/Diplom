@@ -2,6 +2,8 @@
 
 include("include/db_connect.php");
 include("functions/functions.php");
+session_start();
+include("include/auth_cookie.php");
 
 $cat = clearString($_GET["cat"]);
 $type = clearString($_GET["type"]);
@@ -33,7 +35,7 @@ include("include/sorting.php");
   <link rel="stylesheet" href="css/mdb.min.css">
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="grey lighten-3">
@@ -64,8 +66,12 @@ include("include/sorting.php");
   <?php
   include("include/card.php");
   ?>
-  
-  
+
+  <?php
+  include("include/footer.php");
+  ?>
+
+
 
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery.min.js"></script>
@@ -76,6 +82,7 @@ include("include/sorting.php");
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <!-- Your custom scripts (optional) -->
+  <script src="js/jquery.maskedinput.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
 </body>

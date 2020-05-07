@@ -1,28 +1,29 @@
-<div class="row row-cols-1 row-cols-md-4">
-    <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
-    <?php
+<div class="row row-cols-1 row-cols-md-3">
+  <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
+  <?php
 
-    if (!empty($cat) && !empty($type)) {
+  if (!empty($cat) && !empty($type)) {
 
-      $querycat = "AND brand='$cat' AND product_type='$type'";
+    $querycat = "AND brand='$cat' AND product_type='$type'";
+  } else {
+    if (!empty($type)) {
+      $querycat = "AND product_type='$type'";
     } else {
-      if (!empty($type)) {
-        $querycat = "AND product_type='$type'";
-      } else {
-        $querycat = "";
-      }
+      $querycat = "";
     }
+  }
 
 
-    $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $querycat ORDER BY $sorting");
 
-    if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_array($result);
+  $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $querycat ORDER BY $sorting");
 
-      do {
+  if (mysqli_num_rows($result) > 0) {
+    $row = mysqli_fetch_array($result);
+
+    do {
 
 
-        echo '
+      echo '
       <div class="col mb-4">
 
       <div class="card">
@@ -46,7 +47,7 @@
           </p>
           <h4 class="card-price">', $row["price"], ' руб.</h4>
 
-          <button type="button" class="btn btn-success btn-md ml-0">В корзину</button>
+          <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
           <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
         </div>
 
@@ -55,9 +56,9 @@
     </div>
       
       ';
-      } while ($row = mysqli_fetch_array($result));
-    }
+    } while ($row = mysqli_fetch_array($result));
+  }
 
+  ?>
 
-    ?>
-  </div>
+</div>

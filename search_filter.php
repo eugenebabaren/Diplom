@@ -2,6 +2,8 @@
 
 include("include/db_connect.php");
 include("functions/functions.php");
+session_start();
+include("include/auth_cookie.php");
 
 $cat = clearString($_GET["cat"]);
 $type = clearString($_GET["type"]);
@@ -33,7 +35,7 @@ include("include/sorting.php");
   <link rel="stylesheet" href="css/mdb.min.css">
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="css/style.css">
-  <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+  <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 </head>
 
 <body class="grey lighten-3">
@@ -61,7 +63,7 @@ include("include/sorting.php");
 
 
   <!-- CARD -->
-  <div class="row row-cols-1 row-cols-md-4">
+  <div class="row row-cols-1 row-cols-md-3">
     <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
     <?php
 
@@ -114,7 +116,7 @@ include("include/sorting.php");
           </p>
           <h4 class="card-price">', $row["price"], ' руб.</h4>
 
-          <button type="button" class="btn btn-success btn-md ml-0">В корзину</button>
+          <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
           <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
         </div>
 
@@ -128,6 +130,10 @@ include("include/sorting.php");
 
     ?>
   </div>
+
+  <?php
+  include("include/footer.php");
+  ?>
   
   
 
@@ -140,6 +146,7 @@ include("include/sorting.php");
   <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <!-- Your custom scripts (optional) -->
+  <script src="js/jquery.maskedinput.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
 </body>

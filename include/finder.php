@@ -1,4 +1,4 @@
-<div class="finder">
+<div  id="topSection" class="finder">
   <div class="container-fluid mt-5">
     <div class="card mb-3 wow fadeIn">
       <div class="card-body d-sm-flex ">
@@ -14,7 +14,7 @@
                 <h4 class="ml-4 mt-2">Бренд</h4>
 
                 <?php
-                
+
 
                 $result = mysqli_query($link, "SELECT * FROM category WHERE type='drinks'");
 
@@ -56,7 +56,7 @@
 
                 if (mysqli_num_rows($result) > 0) {
                   $row = mysqli_fetch_array($result);
-                  
+
                   $checkbox_id = 999999;
                   do {
 
@@ -87,11 +87,17 @@
 
             <div class="dropdown-divider"></div>
 
-            <button type="submit" class="dropdown-item btn-danger" id="without-filt">Применить</button>
+            <button type="submit" class="dropdown-item btn-success without-filt">Применить</button>
+            <div class="dropdown-divider"></div>
+
+            <a href="index.php">
+              <button type="button" class="dropdown-item btn-danger without-filt">Очистить</button>
+            </a>
 
           </div>
         </form>
         <!-- FILTRATION -->
+
 
 
         <!-- SORTING -->
@@ -108,7 +114,7 @@
                 <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=from-a-to-z" class="dropdown-item">От А до Я</a>
                 <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=from-z-to-a" class="dropdown-item">От Я до А</a>
                 <div class="dropdown-divider"></div>
-                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=without-sorting" class="dropdown-item" href="#">Без сортировки</a>
+                <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=without-sorting" class="dropdown-item btn-danger">Без сортировки</a>
               </div>
               ';
           ?>
