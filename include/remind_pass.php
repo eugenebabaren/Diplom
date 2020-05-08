@@ -25,7 +25,7 @@ if (isset($_POST['remind_pass_submit'])) {
             $update_pass = mysqli_query($link, "UPDATE reg_user SET pass='$pass' WHERE email = '$email'");
 
             mb_language("ru");
-            mail($email, 'Новый пароль для сайта "Здоровое питания."', 'Ваш новый пароль:' . $new_pass, 'From: zpitanie040@gmail.com', 'Content-Type: text/html; charset=utf-8');
+            mail($email, 'Новый пароль для сайта "Здоровое питание."', 'Ваш новый пароль: ' . $new_pass, 'From: zpitanie040@gmail.com', 'Content-Type: text/html; charset=utf-8');
 
             
         } else if (mysqli_num_rows($result) < 1) {

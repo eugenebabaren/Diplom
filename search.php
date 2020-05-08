@@ -5,8 +5,7 @@ include("functions/functions.php");
 session_start();
 include("include/auth_cookie.php");
 
-$cat = clearString($_GET["cat"]);
-$type = clearString($_GET["type"]);
+$search = clearString($_GET["q"]);
 
 include("include/sorting.php");
 
@@ -41,7 +40,6 @@ include("include/sorting.php");
 <body class="grey lighten-3">
   <header>
 
-
     <!-- NAVBAR -->
     <?php
     include("include/navbar.php");
@@ -50,7 +48,7 @@ include("include/sorting.php");
 
     <!-- SIDEBAR -->
     <?php
-    include("include/sidebar_cat.php");
+    include("include/sidebar.php");
     ?>
 
   </header>
@@ -64,13 +62,12 @@ include("include/sorting.php");
 
   <!-- CARD -->
   <?php
-  include("include/card_view_cat.php");
+  include("include/card.php");
   ?>
 
   <?php
   include("include/footer.php");
   ?>
-
 
 
   <!-- jQuery -->

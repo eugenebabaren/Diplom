@@ -44,6 +44,11 @@ include("include/auth_cookie.php");
                             <i class="fas fa-shopping-basket"></i>
                         </a>
                     </li>
+                    <li id="profile_icon" class="nav-item mr-1" hidden>
+                        <a href="profile.php" class="nav-link border border-light rounded waves-effect">
+                            <i class="far fa-user-circle"></i>
+                        </a>
+                    </li>
                     <li class="nav-item mr-1">
                         <a href="sign_in.php" id="sign_in_link" class="nav-link border border-light rounded waves-effect">
                             <b id="sign_in_navbar_title_old" class="sign_in_navbar_title">ВХОД</b>

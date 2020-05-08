@@ -85,7 +85,7 @@
 
           <a id="btn_all_cat" href="index.php">
             <button type="button" class="btn btn-success mt-2">
-              Все категории
+              Все товары
             </button>
           </a>
         </ul>

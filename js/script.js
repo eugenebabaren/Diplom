@@ -33,6 +33,7 @@ $(document).ready(function () {
 
 
     $("#reg_phone").mask("+375 (99) 999-99-99");
+    $("#profile_phone").mask("+375 (99) 999-99-99");
 
 
     //появление иконки выхода после входа
@@ -45,8 +46,11 @@ $(document).ready(function () {
         sign_in_icon_new.classList.add("fas", "fa-sign-out-alt");
         let sign_in_link = document.getElementById("sign_in_link");
         sign_in_link.href = "exit.php";
+        let profile_icon = document.getElementById("profile_icon");
+        profile_icon.hidden = false;
 
     }
+    //УДАЛЕНИЕ КНОПКИ РЕГИСТРАЦИИ
     if (localStorage.reg_remove == 2) {
 
         let reg_remove = document.getElementById("reg_remove");
@@ -54,14 +58,15 @@ $(document).ready(function () {
 
     }
 
+
     //закрытие модального окна "забыли пароль?"
     $("#modalLoginForm").on('hide.bs.modal', function () {
         let error_forgotPassHelpBlock = document.getElementById("error_forgotPassHelpBlock");
         document.getElementById("remind_pass_but").click();
         error_forgotPassHelpBlock.hidden = true;
-        
+
     });
 
-    
+
 
 });

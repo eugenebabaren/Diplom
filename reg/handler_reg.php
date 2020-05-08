@@ -64,12 +64,12 @@ if (isset($_POST['submit'])) {
 
 
     if (strlen($surname) < 1) {
-        $error[] = "Фамилия должна быть от 1 до 30 символов!";
+        $error[] = "Фамилия должна быть не меньше 1 символа!";
 
         echo '<script>
         let mes3 = document.getElementById("surnameHelpBlock");
         let inp3 = document.getElementById("reg_surname");
-        mes3.innerHTML = "Фамилия должна быть от 1 до 30 символов!";
+        mes3.innerHTML = "Фамилия должна быть не меньше 1 символа!";
         mes3.style.color = "red";
         mes3.hidden = false;
         inp3.classList.remove("mb-4");
@@ -80,12 +80,12 @@ if (isset($_POST['submit'])) {
 
 
     if (strlen($name) < 1) {
-        $error[] = "Имя должно быть от 1 до 30 символов!";
+        $error[] = "Имя должно быть не меньше 1 символа!";
 
         echo '<script>
         let mes4 = document.getElementById("nameHelpBlock");
         let inp4 = document.getElementById("reg_name");
-        mes4.innerHTML = "Имя должно быть от 1 до 30 символов!";
+        mes4.innerHTML = "Имя должно быть не меньше 1 символа!";
         mes4.style.color = "red";
         mes4.hidden = false;
         inp4.classList.remove("mb-4");
@@ -96,12 +96,12 @@ if (isset($_POST['submit'])) {
 
 
     if (strlen($patronymic) < 1) {
-        $error[] = "Отчество должно быть от 1 до 30 символов!";
+        $error[] = "Отчество должно быть не меньшене меньше 1 символа!";
 
         echo '<script>
         let mes5 = document.getElementById("patronymicHelpBlock");
         let inp5 = document.getElementById("reg_patronymic");
-        mes5.innerHTML = "Отчество должно быть от 1 до 30 символов!";
+        mes5.innerHTML = "Отчество должно быть не меньше 1 символа!";
         mes5.style.color = "red";
         mes5.hidden = false;
         inp5.classList.remove("mb-4");

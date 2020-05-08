@@ -15,7 +15,7 @@
 
 
 
-  $result = mysqli_query($link, "SELECT * FROM products WHERE title LIKE '%$search%' OR brand LIKE '%$search%' AND visible='1' $querycat ORDER BY $sorting");
+  $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $querycat ORDER BY $sorting");
 
   if (mysqli_num_rows($result) > 0) {
     $row = mysqli_fetch_array($result);
@@ -57,13 +57,14 @@
       
       ';
     } while ($row = mysqli_fetch_array($result));
-  } else {
+  }
+  else {
     echo '
 
-    <h4 class="m-5">ПО ВАШЕМУ ЗАПРОСУ НИЧЕГО НЕ НАЙДЕНО</h4>
+    <h4 class="card-price">ПО ВАШЕМУ ЗАПРОСУ НИЧЕГО НЕ НАЙДЕНО</h4>
 
     ';
-  }
+}
 
 
   ?>

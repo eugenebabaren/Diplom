@@ -27,6 +27,9 @@ if (isset($_POST['sign_submit'])) {
                 sign_in_icon_new.classList.add("fas", "fa-sign-out-alt");
                 sign_in_icon_new.hidden = false;
 
+                let profile_icon = document.getElementById("profile_icon");
+                profile_icon.hidden = false;
+
                 localStorage.reg_remove = 2;
                 let reg_remove = document.getElementById("reg_remove");
                 reg_remove.remove();

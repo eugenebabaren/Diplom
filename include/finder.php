@@ -1,4 +1,4 @@
-<div  id="topSection" class="finder">
+<div id="topSection" class="finder">
   <div class="container-fluid mt-5">
     <div class="card mb-3 wow fadeIn">
       <div class="card-body d-sm-flex ">
@@ -119,14 +119,13 @@
               ';
           ?>
 
-
         </div>
         <!-- SORTING -->
 
 
         <!-- SEARCH -->
         <form method="GET" action="search.php?q=" class="form-inline d-flex ml-auto">
-          <input type="search" class="form-control  " placeholder="Поиск">
+          <input type="search" name="q" class="form-control" placeholder="Поиск" value="<?php echo $search; ?>">
           <button class="btn-success ml-1 mr-0 btn-sm my-0" type="submit">
             <i class="fas fa-search"></i>
           </button>

@@ -62,7 +62,7 @@ include("include/auth_cookie.php");
 
 
 
-    <!-- Default form login -->
+    <!-- ФОРМА ВХОД -->
     <form method="POST" id="form_login" action="" class="text-center border border-light p-5">
 
         <p class="h4 mb-4 mt-3">Вход</p>
@@ -87,7 +87,6 @@ include("include/auth_cookie.php");
             </div>
         </div>
 
-
         <!-- Sign up button -->
         <button name="sign_submit" id="form_submit" class="btn btn-success my-4 btn mt-6" type="submit">Вход</button>
 
@@ -95,6 +94,8 @@ include("include/auth_cookie.php");
     <!-- Default form register -->
 
 
+
+    <!-- ФОРМА ЗАБЫЛИ ПАРОЛЬ? -->
     <form method="POST" id="form_remind_pass" action="" >
         <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -110,10 +111,10 @@ include("include/auth_cookie.php");
                             <i class="fas fa-envelope prefix grey-text my-1 pr-4"></i>
                             <input type="text" name="remind_pass_email" class="form-control validate my-3">
                             <label data-error="wrong" data-success="right" for="remind_pass_email">E-mail</label>
-                            <small id="forgotPassHelpBlock" class="form-text">
+                            <small id="forgotPassHelpBlock" class="form-text mb-3">
                                 ( Введите почтовый ящик указанный при регистрации )
                             </small>
-                            <small id="error_forgotPassHelpBlock" class="form-text" hidden>
+                            <small id="error_forgotPassHelpBlock" class="form-text lead" hidden>
                                 Такого e-mail не существует или вы ничего не ввели!
                             </small>
                         </div>
