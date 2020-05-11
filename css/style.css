@@ -38,7 +38,7 @@ body {
     margin-top: 105px;
 }
 
-.row {
+.card-row {
     margin-left: 275px;
     margin-right: 0px;
 }
@@ -61,7 +61,7 @@ body {
     text-align: center;
 }
 
-.text-center {
+.my-text-center {
     width: 40%;
     margin: 0 auto;
     margin-top: 60px;
@@ -70,6 +70,12 @@ body {
 .remem_me_forgot_pass {
     font-size: 1.1vw;
 }
+
+.cart-progress-line {
+    margin-top: 100px;
+}
+
+
 
 #btn_filtration {
     min-width: 174.98px;

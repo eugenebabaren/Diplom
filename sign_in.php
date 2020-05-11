@@ -63,7 +63,7 @@ include("include/auth_cookie.php");
 
 
     <!-- ФОРМА ВХОД -->
-    <form method="POST" id="form_login" action="" class="text-center border border-light p-5">
+    <form method="POST" id="form_login" action="" class="my-text-center text-center border border-light p-5">
 
         <p class="h4 mb-4 mt-3">Вход</p>
 

@@ -40,7 +40,7 @@ include("include/auth_cookie.php");
                         </a>
                     </li>
                     <li class="nav-item mr-1">
-                        <a href="#" class="nav-link border border-light rounded waves-effect">
+                        <a href="cart.php?action=oneclick" class="nav-link border border-light rounded waves-effect">
                             <i class="fas fa-shopping-basket"></i>
                         </a>
                     </li>

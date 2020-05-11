@@ -63,7 +63,7 @@ include("include/auth_cookie.php");
 
 
 
-    <form method="POST" id="form_profile" action="" class="text-center border border-light p-5">
+    <form method="POST" id="form_profile" action="" class="my-text-center text-center border border-light p-5">
         <!-- Default form register -->
 
         <p id="profile_message" class="h4 mb-4"></p>
