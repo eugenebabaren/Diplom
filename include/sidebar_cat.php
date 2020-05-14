@@ -1,12 +1,12 @@
-<div class="sidebar-fixed position-fixed pl-2">
+<div class="my-block-finder d-flex pt-1">
+  <div class="height-sidebar cart-progress-line card mb-3 wow fadeIn pr-5">
+    <div class="row ml-3 mt-4">
 
-      <div class="treeview-animated ml-2">
+      <div class="treeview-animated pr-5">
 
-        <h4 class="pt-2 pl-3">Категории</h4>
-
+        <h4 class="pt-2 pl-3 pr-5">Категории</h4>
         <hr>
-
-        <ul class="treeview-animated-list mb-2">
+        <ul class="treeview-animated-list mb-3">
 
           <li class="treeview-animated-items">
             <a class="closed">
@@ -35,7 +35,7 @@
                   echo '
                   <a href="view_cat.php?cat=' . strtolower($row["brand"]) . '&type=' . $row["type"] . '">
                     <li>
-                      <div class="lower-element treeview-animated-element"><i class="ic-w mr-1"></i>' . $row["brand"] . '</div>
+                      <div class="lower-element treeview-animated-element"><i class="ic-w mr-1"></i>' . $row["brand"] . '
                     </li>
                   </a>
                   ';
@@ -58,6 +58,7 @@
                   Все хлопья
                 </button>
               </a>
+
 
               <?php
 
@@ -82,7 +83,6 @@
               ?>
             </ul>
           </li>
-
           <a id="btn_all_cat" href="index.php">
             <button type="button" class="btn btn-success mt-2">
               Все товары
@@ -91,3 +91,4 @@
         </ul>
       </div>
     </div>
+  </div>

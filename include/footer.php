@@ -2,10 +2,10 @@
 <footer class="page-footer font-small green pt-4">
 
   <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-left ">
+  <div class="container-fluid text-center text-md-center ">
 
     <!-- Grid row -->
-    <div class="row ml-auto">
+    <div class="row">
 
       <!-- Grid column -->
       <div class="col-md-6 mt-md-0 mt-3">

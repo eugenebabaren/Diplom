@@ -43,13 +43,11 @@ include("include/sorting.php");
     include("include/navbar.php");
     ?>
 
-
-    <!-- SIDEBAR -->
-    <?php
-    include("include/sidebar.php");
-    ?>
-
   </header>
+
+  <?php
+  include("include/sidebar.php");
+  ?>
 
 
   <!-- FINDER -->

@@ -1,7 +1,7 @@
-<div id="topSection" class="finder">
-  <div class="container-fluid mt-5">
+<div class="finder ml-3 mr-2 mb-0 justify-content-between">
+    <!-- <div class="container-fluid d-flex"> -->
     <div class="card mb-3 wow fadeIn">
-      <div class="card-body d-sm-flex ">
+      <div class="card-body d-sm-flex">
 
         <!-- FILTRATION -->
         <button id="btn_filtration" class="btn btn-success dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Фильтрация</button>
@@ -131,7 +131,6 @@
           </button>
         </form>
         <!-- SEARCH -->
+        <!-- </div> -->
       </div>
     </div>
-  </div>
-</div>

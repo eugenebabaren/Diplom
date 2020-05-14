@@ -13,6 +13,7 @@ $address = clearString($_POST["address"]);
 
 if (isset($_POST['submit'])) {
 
+    setlocale(LC_ALL, "ru_RU.UTF-8");
 
     if (strlen($login) < 5 || strlen($login) > 15 || preg_match('/[а-яёА-ЯЁ,;*-]/', $login)) {
         $error[] = "Логин должен быть от 5 до 15 символов латиницей!";
@@ -63,13 +64,13 @@ if (isset($_POST['submit'])) {
     }
 
 
-    if (strlen($surname) < 1) {
-        $error[] = "Фамилия должна быть не меньше 1 символа!";
+    if (strlen($surname) < 1  || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $surname)) {
+        $error[] = "Фамилия должна быть не меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes3 = document.getElementById("surnameHelpBlock");
         let inp3 = document.getElementById("reg_surname");
-        mes3.innerHTML = "Фамилия должна быть не меньше 1 символа!";
+        mes3.innerHTML = "Фамилия должна быть не меньше 1 символа кириллицей или латиницей!";
         mes3.style.color = "red";
         mes3.hidden = false;
         inp3.classList.remove("mb-4");
@@ -79,13 +80,13 @@ if (isset($_POST['submit'])) {
     }
 
 
-    if (strlen($name) < 1) {
-        $error[] = "Имя должно быть не меньше 1 символа!";
+    if (strlen($name) < 1  || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $name)) {
+        $error[] = "Имя должно быть не меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes4 = document.getElementById("nameHelpBlock");
         let inp4 = document.getElementById("reg_name");
-        mes4.innerHTML = "Имя должно быть не меньше 1 символа!";
+        mes4.innerHTML = "Имя должно быть не меньше 1 символа кириллицей или латиницей!";
         mes4.style.color = "red";
         mes4.hidden = false;
         inp4.classList.remove("mb-4");
@@ -95,13 +96,13 @@ if (isset($_POST['submit'])) {
     }
 
 
-    if (strlen($patronymic) < 1) {
-        $error[] = "Отчество должно быть не меньшене меньше 1 символа!";
+    if (strlen($patronymic) < 1  || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $patronymic)) {
+        $error[] = "Отчество должно быть не меньшене меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes5 = document.getElementById("patronymicHelpBlock");
         let inp5 = document.getElementById("reg_patronymic");
-        mes5.innerHTML = "Отчество должно быть не меньше 1 символа!";
+        mes5.innerHTML = "Отчество должно быть не меньше 1 символа кириллицей или латиницей!";
         mes5.style.color = "red";
         mes5.hidden = false;
         inp5.classList.remove("mb-4");

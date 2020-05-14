@@ -49,12 +49,15 @@ include("include/sorting.php");
 
 
     <!-- SIDEBAR -->
-    <?php
-    include("include/sidebar_cat.php");
-    ?>
+
 
   </header>
 
+
+
+  <?php
+  include("include/sidebar_cat.php");
+  ?>
 
   <!-- FINDER -->
   <?php
@@ -63,79 +66,85 @@ include("include/sorting.php");
 
 
   <!-- CARD -->
-  <div class="row row-cols-1 row-cols-md-3">
-    <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
-    <?php
+  <div class="ml-0 mr-2 mb-0">
+    <div class="card-row row row-cols-1 row-cols-md-3 d-flex">
+      <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
+      <?php
 
-    if($_GET["brand"]) {
+      if ($_GET["brand"]) {
         $check_brand = implode(",", $_GET["brand"]);
-    }
+      }
 
-    if(!empty($check_brand)) {
+      if (!empty($check_brand)) {
         $query_brand = "AND brand_id IN ($check_brand)";
-    }
+      }
 
 
-    if($_GET["country"]) {
+      if ($_GET["country"]) {
         $check_country = implode("','", $_GET["country"]);
-    }
+      }
 
-    if(!empty($check_country)) {
+      if (!empty($check_country)) {
         $query_country = "AND country IN ('$check_country')";
-    }
+      }
 
-    $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $query_country $query_brand ORDER BY products_id DESC");
+      $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $query_country $query_brand ORDER BY products_id DESC");
 
-    if (mysqli_num_rows($result) > 0) {
-      $row = mysqli_fetch_array($result);
+      if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
 
-      do {
+        do {
 
 
-        echo '
-      <div class="col mb-4">
+          echo '
+        <div class="col mb-4 pr-2">
 
-      <div class="card">
-
-        <div class="view overlay">
-          <img id="card-image" class="card-img-top" src="images/', $row["image"], '" alt="Card image cap">
-          <a href="#">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-          <div class="dropdown-divider"></div>
+        <div class="card">
+  
+          <div class="view overlay">
+            <img id="card-image" class="card-img-top" src="images/', $row["image"], '" alt="Card image cap">
+            <a href="#">
+              <div class="mask rgba-white-slight"></div>
+            </a>
+            <div class="dropdown-divider"></div>
+          </div>
+  
+  
+          <div class="card-body">
+  
+  
+            <h4 class="card-title"><b>', $row["brand"], '</b></h4>
+  
+            <p class="card-text">
+              <h6>', $row["title"], '</h6>
+            </p>
+            <h4 class="card-price">', $row["price"], ' руб.</h4>
+  
+            <a class="add_to_busket" tid="' . $row["products_id"] . '">
+              <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
+            </a>
+            <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
+          </div>
+  
         </div>
-
-
-        <div class="card-body">
-
-
-          <h4 class="card-title"><b>', $row["brand"], '</b></h4>
-
-          <p class="card-text">
-            <h6>', $row["title"], '</h6>
-          </p>
-          <h4 class="card-price">', $row["price"], ' руб.</h4>
-
-          <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
-          <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
-        </div>
-
+  
       </div>
-
-    </div>
       
       ';
-      } while ($row = mysqli_fetch_array($result));
-    }
+        } while ($row = mysqli_fetch_array($result));
+      }
 
-    ?>
+      ?>
+    </div>
+  </div>
+  </div>
   </div>
 
   <?php
   include("include/footer.php");
   ?>
-  
-  
+
+
 
   <!-- jQuery -->
   <script type="text/javascript" src="js/jquery.min.js"></script>

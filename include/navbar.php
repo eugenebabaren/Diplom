@@ -41,7 +41,9 @@ include("include/auth_cookie.php");
                     </li>
                     <li class="nav-item mr-1">
                         <a href="cart.php?action=oneclick" class="nav-link border border-light rounded waves-effect">
-                            <i class="fas fa-shopping-basket"></i>
+                            <i id="fa-shopping-basket" class="fas fa-shopping-basket badge-wrapper">
+                                <span class='badge badge-danger ml-1'>1</span>
+                            </i>
                         </a>
                     </li>
                     <li id="profile_icon" class="nav-item mr-1" hidden>

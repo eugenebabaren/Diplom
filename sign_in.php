@@ -1,27 +1,18 @@
 <?php
 
-
 include("include/db_connect.php");
 include("functions/functions.php");
+
+session_start();
+
+session_destroy();
 
 session_start();
 
 $login = clearString($_POST["auth_login"]);
 $pass = md5(clearString($_POST["auth_pass"]));
 
-
-// if (isset($_POST["rememberme"])) {
-//     setcookie('rememberme', $login . '+' . $pass, time() + 3600 * 24 * 31, "/");
-// }
-// else if (isset($_COOKIE["rememberme"])) {
-//     setcookie("rememberme", "", time() - 3600);
-// }
 include("include/auth_cookie.php");
-
-
-// session_destroy();
-// unset($_SESSION['auth']);
-// setcookie('rememberme', '', 0, '/');
 
 ?>
 
@@ -75,13 +66,6 @@ include("include/auth_cookie.php");
         <input type="password" name="auth_pass" id="sign_pass" class="form-control" placeholder="Введите пароль" aria-describedby="defaultLoginFormPasswordHelpBlock">
 
         <div class="remem_me_forgot_pass d-flex justify-content-between mt-3">
-            <!-- <div>
-                <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" name="rememberme" id="rememberme">
-                    <label class="custom-control-label mt-1" for="rememberme">Запомнить меня</label>
-                </div>
-            </div> -->
-
             <div>
                 <a href="" id="remind_pass_but" data-toggle="modal" data-target="#modalLoginForm">Забыли пароль?</a>
             </div>

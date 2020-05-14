@@ -31,9 +31,14 @@ $(document).ready(function () {
     });
 
 
+    // обновление количества товаров на иконке корзины
+    loadcart();
+
+
 
     $("#reg_phone").mask("+375 (99) 999-99-99");
     $("#profile_phone").mask("+375 (99) 999-99-99");
+    $("#order_phone").mask("+375 (99) 999-99-99");
 
 
     //появление иконки выхода после входа
@@ -69,4 +74,129 @@ $(document).ready(function () {
 
 
 
+
+    //корзина
+    $('.add_to_busket').click(function () {
+        var tid = $(this).attr("tid");
+
+        $.ajax({
+            type: "POST",
+            url: "addtocart.php",
+            data: "id=" + tid,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                loadcart();
+            }
+        });
+    })
+
+    // обновление количества товаров на иконке корзины
+    function loadcart() {
+        $.ajax({
+            type: "POST",
+            url: "include/loadcart.php",
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                if (data == 0) {
+                    $("#fa-shopping-basket > span").html("0");
+                } else {
+                    $("#fa-shopping-basket > span").html(data);
+                }
+            }
+        });
+    }
+
+    // корзина минус
+    $('.minus').click(function () {
+        var iid = $(this).attr("iid");
+
+        $.ajax({
+            type: "POST",
+            url: "count-minus.php",
+            data: "id=" + iid,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                $('#plus-minus-input-id' + iid).val(data);
+                loadcart();
+
+                var priceproduct = $('#tovar' + iid + ' > span').attr("price");
+                result_total = Number(priceproduct) * Number(data);
+
+                $('#tovar' + iid + ' > span').html(result_total + " руб.");
+                $('#tovar2' + iid + ' > span').html(result_total + " руб.");
+
+                itog_price();
+            }
+        });
+    })
+
+    // корзина плюс
+    $('.plus').click(function () {
+        var iid = $(this).attr("iid");
+
+        $.ajax({
+            type: "POST",
+            url: "count-plus.php",
+            data: "id=" + iid,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                $('#plus-minus-input-id' + iid).val(data);
+                loadcart();
+
+                var priceproduct = $('#tovar' + iid + ' > span').attr("price");
+                result_total = Number(priceproduct) * Number(data);
+
+                $('#tovar' + iid + ' > span').html(result_total + " руб.");
+                $('#tovar2' + iid + ' > span').html(result_total + " руб.");
+
+                itog_price();
+            }
+        });
+    })
+
+    // корзина ввод в поле и enter
+    $('.count-input').keypress(function (e) {
+
+        if (e.keyCode == 13) {
+            var iid = $(this).attr("iid");
+            var incount = $("#plus-minus-input-id" + iid).val();
+
+            $.ajax({
+                type: "POST",
+                url: "count-input.php",
+                data: "id=" + iid + "&count=" + incount,
+                dataType: "html",
+                cache: false,
+                success: function (data) {
+                    $('#plus-minus-input-id' + iid).val(data);
+                    loadcart();
+
+                    var priceproduct = $('#tovar' + iid + ' > span').attr("price");
+                    result_total = Number(priceproduct) * Number(data);
+
+                    $('#tovar' + iid + ' > span').html(result_total + " руб.");
+                    $('#tovar2' + iid + ' > span').html(result_total + " руб.");
+
+                    itog_price();
+                }
+            });
+        }
+    })
+
+    // итоговая цена
+    function itog_price() {
+        $.ajax({
+            type: "POST",
+            url: "itog_price.php",
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                $('.itog_price > strong').html(data);
+            }
+        });
+    }
 });

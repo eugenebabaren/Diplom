@@ -13,6 +13,7 @@ $profile_address = clearString($_POST["profile_address"]);
 
 if (isset($_POST['profile_form_submit'])) {
 
+    setlocale(LC_ALL, "ru_RU.UTF-8");
 
     if ($_SESSION['auth_pass'] != md5($profile_current_pass)) {
         $error[] = "Неверный текущий пароль!";
@@ -54,13 +55,13 @@ if (isset($_POST['profile_form_submit'])) {
 
 
 
-    if (strlen($profile_surname) < 1) {
-        $error[] = "Фамилия должна быть не меньше 1 символа!";
+    if (strlen($profile_surname) < 1 || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $profile_surname)) {
+        $error[] = "Фамилия должна быть не меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes3 = document.getElementById("surnameHelpBlock");
         let inp3 = document.getElementById("profile_surname");
-        mes3.innerHTML = "Фамилия должна быть не меньше 1 символа!";
+        mes3.innerHTML = "Фамилия должна быть не меньше 1 символа кириллицей или латиницей!";
         mes3.style.color = "red";
         mes3.hidden = false;
         inp3.classList.remove("mb-4");
@@ -70,13 +71,13 @@ if (isset($_POST['profile_form_submit'])) {
     }
 
 
-    if (strlen($profile_name) < 1) {
-        $error[] = "Имя должно быть не меньше 1 символа!";
+    if (strlen($profile_name) < 1 || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $profile_name)) {
+        $error[] = "Имя должно быть не меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes4 = document.getElementById("nameHelpBlock");
         let inp4 = document.getElementById("profile_name");
-        mes4.innerHTML = "Имя должно быть не меньше 1 символа!";
+        mes4.innerHTML = "Имя должно быть не меньше 1 символа кириллицей или латиницей!";
         mes4.style.color = "red";
         mes4.hidden = false;
         inp4.classList.remove("mb-4");
@@ -86,13 +87,13 @@ if (isset($_POST['profile_form_submit'])) {
     }
 
 
-    if (strlen($profile_patronymic) < 1) {
-        $error[] = "Отчество должно быть не меньшене меньше 1 символа!";
+    if (strlen($profile_patronymic) < 1 || !preg_match('/^[а-яА-Яa-zA-Z]*$/u', $profile_patronymic)) {
+        $error[] = "Отчество должно быть не меньшене меньше 1 символа кириллицей или латиницей!";
 
         echo '<script>
         let mes5 = document.getElementById("patronymicHelpBlock");
         let inp5 = document.getElementById("profile_patronymic");
-        mes5.innerHTML = "Отчество должно быть не меньше 1 символа!";
+        mes5.innerHTML = "Отчество должно быть не меньше 1 символа кириллицей или латиницей!";
         mes5.style.color = "red";
         mes5.hidden = false;
         inp5.classList.remove("mb-4");

@@ -129,7 +129,7 @@ include("include/auth_cookie.php");
 
 
     <?php
-    include("reg/handler_reg.php");
+    include("include/handler_reg.php");
     ?>
     <!-- Default form register -->
 

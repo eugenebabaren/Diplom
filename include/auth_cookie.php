@@ -6,6 +6,7 @@ if (isset($_POST['sign_submit'])) {
     if (mysqli_num_rows($result) == 1) {
         $row = mysqli_fetch_array($result);
 
+        $_SESSION['auth'] = 'yes_auth';
         $_SESSION['auth_login'] = $row['login'];
         $_SESSION['auth_pass'] = $row['pass'];
         $_SESSION['auth_surname'] = $row['surname'];

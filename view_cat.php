@@ -48,13 +48,16 @@ include("include/sorting.php");
     ?>
 
 
-    <!-- SIDEBAR -->
-    <?php
-    include("include/sidebar_cat.php");
-    ?>
+
 
   </header>
 
+
+
+  <!-- SIDEBAR -->
+  <?php
+  include("include/sidebar_cat.php");
+  ?>
 
   <!-- FINDER -->
   <?php

@@ -1,30 +1,31 @@
-<div class="card-row row row-cols-1 row-cols-md-3">
-  <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
-  <?php
+<div class="ml-0 mr-2 mb-0">
+  <div class="card-row row row-cols-1 row-cols-md-3 d-flex">
+    <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
+    <?php
 
-  if (!empty($cat) && !empty($type)) {
+    if (!empty($cat) && !empty($type)) {
 
-    $querycat = "AND brand='$cat' AND product_type='$type'";
-  } else {
-    if (!empty($type)) {
-      $querycat = "AND product_type='$type'";
+      $querycat = "AND brand='$cat' AND product_type='$type'";
     } else {
-      $querycat = "";
+      if (!empty($type)) {
+        $querycat = "AND product_type='$type'";
+      } else {
+        $querycat = "";
+      }
     }
-  }
 
 
 
-  $result = mysqli_query($link, "SELECT * FROM products WHERE title LIKE '%$search%' OR brand LIKE '%$search%' AND visible='1' $querycat ORDER BY $sorting");
+    $result = mysqli_query($link, "SELECT * FROM products WHERE title LIKE '%$search%' OR brand LIKE '%$search%' AND visible='1' $querycat ORDER BY $sorting");
 
-  if (mysqli_num_rows($result) > 0) {
-    $row = mysqli_fetch_array($result);
+    if (mysqli_num_rows($result) > 0) {
+      $row = mysqli_fetch_array($result);
 
-    do {
+      do {
 
 
-      echo '
-      <div class="col mb-4">
+        echo '
+      <div class="col mb-4 pr-2">
 
       <div class="card">
 
@@ -47,7 +48,9 @@
           </p>
           <h4 class="card-price">', $row["price"], ' руб.</h4>
 
-          <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
+          <a class="add_to_busket" tid="' . $row["products_id"] . '">
+            <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
+          </a>
           <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
         </div>
 
@@ -56,16 +59,21 @@
     </div>
       
       ';
-    } while ($row = mysqli_fetch_array($result));
-  } else {
-    echo '
+      } while ($row = mysqli_fetch_array($result));
+    } else {
+      echo '
 
     <h4 class="m-5">ПО ВАШЕМУ ЗАПРОСУ НИЧЕГО НЕ НАЙДЕНО</h4>
 
     ';
-  }
+    }
 
 
-  ?>
+    ?>
 
+
+  </div>
+</div>
+
+</div>
 </div>
