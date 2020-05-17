@@ -27,8 +27,6 @@ body {
 }
 
 .dropdown-ul {
-    /* column-count: 2;
-    column-gap: 2rem; */
     list-style: none;
 }
 
@@ -223,4 +221,21 @@ body {
             margin-top: -.3rem;
         }
     }
+}
+
+.amber-textarea textarea.md-textarea:focus:not([readonly]) {
+    border-bottom: 1px solid #ffa000;
+    box-shadow: 0 1px 0 0 #ffa000;
+}
+
+.active-amber-textarea.md-form label.active {
+    color: #ffa000;
+}
+
+.active-amber-textarea.md-form textarea.md-textarea:focus:not([readonly])+label {
+    color: #ffa000;
+}
+
+body.modal-open {
+    overflow: hidden;
 }

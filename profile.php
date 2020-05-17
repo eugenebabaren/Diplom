@@ -74,7 +74,7 @@ include("include/auth_cookie.php");
 
         <div id="form-profile">
 
-            <p class="h4 mb-4">Изменение профиля</p>
+            <p class="h4 mb-4 font-weight-bold">Изменение профиля</p>
 
             <p id="message-success-edit" class="h5 mb-4 text-success" hidden>Данные успешно изменены!</p>
 
@@ -88,7 +88,7 @@ include("include/auth_cookie.php");
             <label data-error="wrong" data-success="right" for="profile_new_pass">Новый пароль</label>
             <input type="password" name="profile_new_pass" id="profile_new_pass" class="form-control mb-2" placeholder="Новый пароль" aria-describedby="passwordHelpBlock">
             <small id="passwordHelpBlock" class="form-text text-muted mb-4">
-                Новый пароль должен быть от 8 до 15 символов!
+                Новый пароль должен быть от 8 до 15 символов латиницей и цифрами!
             </small>
 
             <label data-error="wrong" data-success="right" for="profile_surname">Фамилия</label>

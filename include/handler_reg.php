@@ -16,12 +16,12 @@ if (isset($_POST['submit'])) {
     setlocale(LC_ALL, "ru_RU.UTF-8");
 
     if (strlen($login) < 5 || strlen($login) > 15 || preg_match('/[а-яёА-ЯЁ,;*-]/', $login)) {
-        $error[] = "Логин должен быть от 5 до 15 символов латиницей!";
+        $error[] = "Логин должен быть от 5 до 15 символов латиницей и цифрами!";
 
         echo '<script>
                 let mes1 = document.getElementById("loginHelpBlock");
                 let inp1 = document.getElementById("reg_login");
-                mes1.innerHTML = "Логин должен быть от 5 до 15 символов латиницей!";
+                mes1.innerHTML = "Логин должен быть от 5 до 15 символов латиницей и цифрами!";
                 mes1.style.color = "red";
                 mes1.hidden = false;
                 inp1.classList.remove("mb-4");
@@ -48,12 +48,12 @@ if (isset($_POST['submit'])) {
 
 
     if (strlen($pass) < 8 || strlen($pass) > 15  || preg_match('/[а-яёА-ЯЁ,;*-]/', $pass)) {
-        $error[] = "Пароль должен быть от 8 до 15 символов латиницей!";
+        $error[] = "Пароль должен быть от 8 до 15 символов латиницей и цифрами!";
 
         echo '<script>
         let mes2 = document.getElementById("passwordHelpBlock");
         let inp2 = document.getElementById("reg_pass");
-        mes2.innerHTML = "Пароль должен быть от 8 до 15 символов латиницей!";
+        mes2.innerHTML = "Пароль должен быть от 8 до 15 символов латиницей и цифрами!";
         mes2.classList.remove("text-muted");
         mes2.style.color = "red";
         mes2.hidden = false;
@@ -198,9 +198,10 @@ if (isset($_POST['submit'])) {
             elem.remove();
             let mes = document.getElementById("reg_message");
             mes.innerHTML = "Регистрация успешно завершена!";
-            mes.style.marginTop = "100px";
+            mes.style.marginTop = "50px";
             document.getElementById("auth_but").hidden = false;
             </script>
+            
             ';
         }
     }

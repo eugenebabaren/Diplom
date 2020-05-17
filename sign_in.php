@@ -56,7 +56,7 @@ include("include/auth_cookie.php");
     <!-- ФОРМА ВХОД -->
     <form method="POST" id="form_login" action="" class="my-text-center text-center border border-light p-5">
 
-        <p class="h4 mb-4 mt-3">Вход</p>
+        <p class="h4 mb-4 mt-3 font-weight-bold">Вход</p>
 
         <p id="message-auth" class="h5 mb-4" hidden>Неверный логин и (или) пароль!</p>
 

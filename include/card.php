@@ -1,5 +1,5 @@
 <div class="ml-0 mr-2 mb-0">
-  <div class="card-row row row-cols-1 row-cols-md-3 d-flex">
+  <div class="row row-cols-1 row-cols-md-3 d-flex">
     <!-- ВЫБОРКА ТОВАРОВ ИЗ БД -->
     <?php
 
@@ -31,7 +31,7 @@
 
         <div class="view overlay">
           <img id="card-image" class="card-img-top" src="images/', $row["image"], '" alt="Card image cap">
-          <a href="#">
+          <a href="view_content.php?id='. $row["products_id"]. '">
             <div class="mask rgba-white-slight"></div>
           </a>
           <div class="dropdown-divider"></div>

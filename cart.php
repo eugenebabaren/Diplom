@@ -243,8 +243,8 @@ if (isset($_POST['submitdata'])) {
                     $all_price = $all_price + $int;
 
                     $img_path = './images/' . $row["image"];
-                    $max_width = 100;
-                    $max_height = 100;
+                    $max_width = 300;
+                    $max_height = 300;
                     list($width, $height) = getimagesize($img_path);
                     $ratioh = $max_height / $height;
                     $ratiow = $max_width / $width;
@@ -268,7 +268,7 @@ if (isset($_POST['submitdata'])) {
                                 <div class="col-md-5 col-lg-3 col-xl-3">
                                     <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                                         <img class="img-fluid w-100" src="' . $img_path . '" alt="Sample">
-                                        <a href="#!">
+                                        <a href="view_content.php?id='. $row["products_id"]. '">
                                             <div class="mask waves-effect waves-light">
                                                 <img class="img-fluid w-100" src="' . $img_path . '">
                                             </div>
@@ -280,8 +280,9 @@ if (isset($_POST['submitdata'])) {
                                     <div>
                                         <div class="d-flex justify-content-between">
                                             <div class="mr-3">
+                                            <a href="view_content.php?id='. $row["products_id"]. '" class="text-dark">
                                                 <h5>' . $row["title"] . '</h5>
-
+                                            </a>
                                             </div>
                                             
                                         </div>

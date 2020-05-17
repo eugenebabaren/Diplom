@@ -40,7 +40,7 @@ if (isset($_POST['profile_form_submit'])) {
         echo '<script>
             let mes2 = document.getElementById("passwordHelpBlock");
             let inp2 = document.getElementById("profile_new_pass");
-            mes2.innerHTML = "Новый пароль должен быть от 8 до 15 символов латиницей!";
+            mes2.innerHTML = "Новый пароль должен быть от 8 до 15 символов латиницей и цифрами!";
             mes2.classList.remove("text-muted");
             mes2.style.color = "red";
             mes2.hidden = false;
