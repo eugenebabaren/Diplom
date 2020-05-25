@@ -1,8 +1,8 @@
 <!-- Footer -->
-<footer class="page-footer font-small green pt-4">
+<footer class="page-footer font-small green pt-4 pb-0 mb-0">
 
   <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-center ">
+  <div class="container-fluid text-center text-md-center">
 
     <!-- Grid row -->
     <div class="row">
@@ -75,7 +75,7 @@
 
   <!-- Copyright -->
   <div class="footer-copyright text-center py-3">© 2020 Copyright:
-    <a href="https://mdbootstrap.com/"> MDBootstrap.com</a>
+    <a href="index.php"> Здоровое питание</a>
   </div>
   <!-- Copyright -->
 

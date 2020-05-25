@@ -186,15 +186,16 @@ if (isset($_POST['submitdata'])) {
 
     </header>
 
-    <?php
-    $action = clearString($_GET["action"]);
-    switch ($action) {
+    <main>
+        <?php
+        $action = clearString($_GET["action"]);
+        switch ($action) {
 
 
 
-        case 'oneclick':
+            case 'oneclick':
 
-            echo '
+                echo '
 
         <div class="cart-progress-line container-fluid pt-1">
         <div class="card mb-3 wow fadeIn">
@@ -212,6 +213,7 @@ if (isset($_POST['submitdata'])) {
                 
                 <a href="cart.php?action=clear" class="ml-auto">
                     <button type="button" class="btn btn-danger mt-0">
+                        <i class="far fa-trash-alt mr-2"></i>
                         Очистить корзину
                     </button>
                 </a>
@@ -232,28 +234,28 @@ if (isset($_POST['submitdata'])) {
         ';
 
 
-            $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
 
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_array($result);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_array($result);
 
-                do {
+                    do {
 
-                    $int = $row["cart_price"] * $row["cart_count"];
-                    $all_price = $all_price + $int;
+                        $int = $row["cart_price"] * $row["cart_count"];
+                        $all_price = $all_price + $int;
 
-                    $img_path = './images/' . $row["image"];
-                    $max_width = 300;
-                    $max_height = 300;
-                    list($width, $height) = getimagesize($img_path);
-                    $ratioh = $max_height / $height;
-                    $ratiow = $max_width / $width;
-                    $ratio = min($ratioh, $ratiow);
+                        $img_path = './images/' . $row["image"];
+                        $max_width = 300;
+                        $max_height = 300;
+                        list($width, $height) = getimagesize($img_path);
+                        $ratioh = $max_height / $height;
+                        $ratiow = $max_width / $width;
+                        $ratio = min($ratioh, $ratiow);
 
-                    $width = intval($ratio * $width);
-                    $height = intval($ratio * $ratiow);
+                        $width = intval($ratio * $width);
+                        $height = intval($ratio * $ratiow);
 
-                    echo '
+                        echo '
                             <div class="card wish-list mb-3">
                             
                                 <button type="button" class="close ml-auto mr-3 mt-3 mb-0" aria-label="Close">
@@ -268,7 +270,7 @@ if (isset($_POST['submitdata'])) {
                                 <div class="col-md-5 col-lg-3 col-xl-3">
                                     <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                                         <img class="img-fluid w-100" src="' . $img_path . '" alt="Sample">
-                                        <a href="view_content.php?id='. $row["products_id"]. '">
+                                        <a href="view_content.php?id=' . $row["products_id"] . '">
                                             <div class="mask waves-effect waves-light">
                                                 <img class="img-fluid w-100" src="' . $img_path . '">
                                             </div>
@@ -280,7 +282,7 @@ if (isset($_POST['submitdata'])) {
                                     <div>
                                         <div class="d-flex justify-content-between">
                                             <div class="mr-3">
-                                            <a href="view_content.php?id='. $row["products_id"]. '" class="text-dark">
+                                            <a href="view_content.php?id=' . $row["products_id"] . '" class="text-dark">
                                                 <h5>' . $row["title"] . '</h5>
                                             </a>
                                             </div>
@@ -307,9 +309,9 @@ if (isset($_POST['submitdata'])) {
                         </div>
                         
                             ';
-                } while ($row = mysqli_fetch_array($result));
+                    } while ($row = mysqli_fetch_array($result));
 
-                echo '
+                    echo '
                     </div>
 
 
@@ -321,12 +323,12 @@ if (isset($_POST['submitdata'])) {
 
                         <ul class="list-group list-group-flush">';
 
-                $result2 = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
-                $row2 = mysqli_fetch_array($result2);
-                do {
+                    $result2 = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                    $row2 = mysqli_fetch_array($result2);
+                    do {
 
 
-                    echo '
+                        echo '
                             <div class="row d-flex justify-content-between ml-1">
                                     <li class="list-group-item d-flex justify-content-between align-items-left border-0 px-0 pb-0 w-50">
                                     ' . $row2["title"] . '
@@ -335,10 +337,10 @@ if (isset($_POST['submitdata'])) {
                             </div>
                                 
                                 ';
-                } while ($row2 = mysqli_fetch_array($result2));
+                    } while ($row2 = mysqli_fetch_array($result2));
 
 
-                echo '
+                    echo '
                             <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0">
                                 Доставка
                                 <span>Бесплатно</span>
@@ -358,20 +360,20 @@ if (isset($_POST['submitdata'])) {
                 </div>
 
                     ';
-            } else {
-                echo '
+                } else {
+                    echo '
                     <h3 class="m-5">Корзина пуста</h3>
                     ';
-            }
+                }
 
-            echo '
+                echo '
         </div>
 
         </div>
 
     </section>
         ';
-            break;
+                break;
 
 
 
@@ -379,10 +381,10 @@ if (isset($_POST['submitdata'])) {
 
 
 
-            // 2 СТАДИЯ
+                // 2 СТАДИЯ
 
-        case 'confirm':
-            echo '
+            case 'confirm':
+                echo '
 
         <div class="cart-progress-line container-fluid">
         <div class="card mb-3 wow fadeIn">
@@ -399,11 +401,11 @@ if (isset($_POST['submitdata'])) {
         </div>';
 
 
-            if ($_SESSION["order_delivery"] == "По почте") $chck1 = "checked";
-            if ($_SESSION["order_delivery"] == "Курьером") $chck2 = "checked";
-            if ($_SESSION["order_delivery"] == "Самовывоз") $chck3 = "checked";
+                if ($_SESSION["order_delivery"] == "По почте") $chck1 = "checked";
+                if ($_SESSION["order_delivery"] == "Курьером") $chck2 = "checked";
+                if ($_SESSION["order_delivery"] == "Самовывоз") $chck3 = "checked";
 
-            echo '
+                echo '
 
         <div class="container-fluid">
             <div class="card mb-3 wow fadeIn">
@@ -450,8 +452,8 @@ if (isset($_POST['submitdata'])) {
 
                 <div class="order_inputs">';
 
-            if ($_SESSION['auth'] != 'yes_auth') {
-                echo '
+                if ($_SESSION['auth'] != 'yes_auth') {
+                    echo '
             
                 <input type="text" name="order_fio" id="order_fio" value="' . $_SESSION["order_fio"] . '" class="form-control mb-4" placeholder="ФИО">
                 <small id="order_fioHelpBlock" class="form-text mb-3" hidden>
@@ -476,8 +478,8 @@ if (isset($_POST['submitdata'])) {
 
             
             ';
-            }
-            echo '
+                }
+                echo '
             
             <div class="form-group">
                 <textarea name="order_note" class="form-control" id="order_noteHelpBlock" rows="7" placeholder="Если необходимо, здесь вы можете уточнить информацию о заказе">' . $_SESSION["order_note"] . '</textarea>
@@ -490,7 +492,7 @@ if (isset($_POST['submitdata'])) {
         </div>
         </form>
         ';
-            break;
+                break;
 
 
 
@@ -500,8 +502,8 @@ if (isset($_POST['submitdata'])) {
 
 
 
-        case 'completion':
-            echo '
+            case 'completion':
+                echo '
 
         <div class="cart-progress-line container-fluid">
         <div class="card mb-3 wow fadeIn">
@@ -521,17 +523,17 @@ if (isset($_POST['submitdata'])) {
         </div>
         </div>';
 
-            if ($_SESSION['auth'] == 'yes_auth') {
-                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
-                if (mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_array($result);
+                if ($_SESSION['auth'] == 'yes_auth') {
+                    $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_array($result);
 
-                    do {
-                        $int = $int + ($row["cart_price"] * $row["cart_count"]);
-                        $total_price_cart = $int;
-                    } while ($row = mysqli_fetch_array($result));
-                }
-                echo '
+                        do {
+                            $int = $int + ($row["cart_price"] * $row["cart_count"]);
+                            $total_price_cart = $int;
+                        } while ($row = mysqli_fetch_array($result));
+                    }
+                    echo '
 
             <div class="container-fluid">
             <div class="card mb-3 wow fadeIn">
@@ -551,29 +553,36 @@ if (isset($_POST['submitdata'])) {
                     </li>
                     <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Адрес доставки: </span>' . $_SESSION['auth_address'] . '</h5>
-                    </li>
-                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    </li>';
+
+                    if (strlen($_SESSION['order_note']) > 0) {
+                        echo '
+
+                    <li id="order_note_hide" class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Примечание: </span>' . $_SESSION['order_note'] . '</h5>
-                    </li>
-                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    </li>';
+                    }
+
+                    echo '
+                    <li class="ml-4 mb-3 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                         <h5><span class="font-weight-bold">Итого: </span>' . $total_price_cart . ' руб.</h5>
                     </li>
                 </ul>
             
             </div>
         </div>';
-            } else {
+                } else {
 
-                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
-                if (mysqli_num_rows($result) > 0) {
-                    $row = mysqli_fetch_array($result);
+                    $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_array($result);
 
-                    do {
-                        $int = $int + ($row["cart_price"] * $row["cart_count"]);
-                        $total_price_cart = $int;
-                    } while ($row = mysqli_fetch_array($result));
-                }
-                echo '
+                        do {
+                            $int = $int + ($row["cart_price"] * $row["cart_count"]);
+                            $total_price_cart = $int;
+                        } while ($row = mysqli_fetch_array($result));
+                    }
+                    echo '
 
             <div class="container-fluid">
             <div class="card mb-3 wow fadeIn">
@@ -594,22 +603,26 @@ if (isset($_POST['submitdata'])) {
                     </li>
                     <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Адрес доставки: </span>' . $_SESSION['order_address'] . '</h5>
-                    </li>
-                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    </li>';
+
+                    if (strlen($_SESSION['order_note']) > 0) {
+                        echo '
+
+                    <li id="order_note_hide" class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Примечание: </span>' . $_SESSION['order_note'] . '</h5>
-                    </li>
-                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    </li>';
+                    }
+                    echo '
+                    <li class="ml-4 mb-3 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                         <h5><span class="font-weight-bold">Итого: </span>' . $total_price_cart . ' руб.</h5>
                     </li>
                 </ul>
             
             </div>
         </div>';
-            }
+                }
 
-            break;
-
-
+                break;
 
 
 
@@ -617,8 +630,10 @@ if (isset($_POST['submitdata'])) {
 
 
 
-        default:
-            echo '
+
+
+            default:
+                echo '
 
             <div class="cart-progress-line container-fluid pt-1">
         <div class="card mb-3 wow fadeIn">
@@ -636,6 +651,7 @@ if (isset($_POST['submitdata'])) {
                 
                 <a href="cart.php?action=clear" class="ml-auto">
                     <button type="button" class="btn btn-danger mt-0">
+                        <i class="far fa-trash-alt mr-2"></i>
                         Очистить корзину
                     </button>
                 </a>
@@ -656,28 +672,28 @@ if (isset($_POST['submitdata'])) {
         ';
 
 
-            $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
 
-            if (mysqli_num_rows($result) > 0) {
-                $row = mysqli_fetch_array($result);
+                if (mysqli_num_rows($result) > 0) {
+                    $row = mysqli_fetch_array($result);
 
-                do {
+                    do {
 
-                    $int = $row["cart_price"] * $row["cart_count"];
-                    $all_price = $all_price + $int;
+                        $int = $row["cart_price"] * $row["cart_count"];
+                        $all_price = $all_price + $int;
 
-                    $img_path = './images/' . $row["image"];
-                    $max_width = 100;
-                    $max_height = 100;
-                    list($width, $height) = getimagesize($img_path);
-                    $ratioh = $max_height / $height;
-                    $ratiow = $max_width / $width;
-                    $ratio = min($ratioh, $ratiow);
+                        $img_path = './images/' . $row["image"];
+                        $max_width = 300;
+                        $max_height = 300;
+                        list($width, $height) = getimagesize($img_path);
+                        $ratioh = $max_height / $height;
+                        $ratiow = $max_width / $width;
+                        $ratio = min($ratioh, $ratiow);
 
-                    $width = intval($ratio * $width);
-                    $height = intval($ratio * $ratiow);
+                        $width = intval($ratio * $width);
+                        $height = intval($ratio * $ratiow);
 
-                    echo '
+                        echo '
                             <div class="card wish-list mb-3">
                             
                                 <button type="button" class="close ml-auto mr-3 mt-3 mb-0" aria-label="Close">
@@ -692,7 +708,7 @@ if (isset($_POST['submitdata'])) {
                                 <div class="col-md-5 col-lg-3 col-xl-3">
                                     <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
                                         <img class="img-fluid w-100" src="' . $img_path . '" alt="Sample">
-                                        <a href="#!">
+                                        <a href="view_content.php?id=' . $row["products_id"] . '">
                                             <div class="mask waves-effect waves-light">
                                                 <img class="img-fluid w-100" src="' . $img_path . '">
                                             </div>
@@ -704,8 +720,9 @@ if (isset($_POST['submitdata'])) {
                                     <div>
                                         <div class="d-flex justify-content-between">
                                             <div class="mr-3">
+                                            <a href="view_content.php?id=' . $row["products_id"] . '" class="text-dark">
                                                 <h5>' . $row["title"] . '</h5>
-
+                                            </a>
                                             </div>
                                             
                                         </div>
@@ -730,9 +747,9 @@ if (isset($_POST['submitdata'])) {
                         </div>
                         
                             ';
-                } while ($row = mysqli_fetch_array($result));
+                    } while ($row = mysqli_fetch_array($result));
 
-                echo '
+                    echo '
                     </div>
 
 
@@ -744,12 +761,12 @@ if (isset($_POST['submitdata'])) {
 
                         <ul class="list-group list-group-flush">';
 
-                $result2 = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
-                $row2 = mysqli_fetch_array($result2);
-                do {
+                    $result2 = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                    $row2 = mysqli_fetch_array($result2);
+                    do {
 
 
-                    echo '
+                        echo '
                             <div class="row d-flex justify-content-between ml-1">
                                     <li class="list-group-item d-flex justify-content-between align-items-left border-0 px-0 pb-0 w-50">
                                     ' . $row2["title"] . '
@@ -758,10 +775,10 @@ if (isset($_POST['submitdata'])) {
                             </div>
                                 
                                 ';
-                } while ($row2 = mysqli_fetch_array($result2));
+                    } while ($row2 = mysqli_fetch_array($result2));
 
 
-                echo '
+                    echo '
                             <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0">
                                 Доставка
                                 <span>Бесплатно</span>
@@ -781,13 +798,13 @@ if (isset($_POST['submitdata'])) {
                 </div>
 
                     ';
-            } else {
-                echo '
+                } else {
+                    echo '
                     <h3 class="m-5">Корзина пуста</h3>
                     ';
-            }
+                }
 
-            echo '
+                echo '
         </div>
 
         </div>
@@ -795,11 +812,11 @@ if (isset($_POST['submitdata'])) {
     </section>
             
         ';
-            break;
-    }
-    ?>
+                break;
+        }
+        ?>
 
-
+    </main>
 
     <?php
     include("include/footer.php");

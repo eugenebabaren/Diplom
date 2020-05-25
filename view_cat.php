@@ -41,34 +41,32 @@ include("include/sorting.php");
 <body class="grey lighten-3">
   <header>
 
-
     <!-- NAVBAR -->
     <?php
     include("include/navbar.php");
     ?>
 
-
-
-
   </header>
 
 
+  <main>
+    <!-- SIDEBAR -->
+    <?php
+    include("include/sidebar_cat.php");
+    ?>
 
-  <!-- SIDEBAR -->
-  <?php
-  include("include/sidebar_cat.php");
-  ?>
-
-  <!-- FINDER -->
-  <?php
-  include("include/finder.php");
-  ?>
+    <!-- FINDER -->
+    <?php
+    include("include/finder.php");
+    ?>
 
 
-  <!-- CARD -->
-  <?php
-  include("include/card_view_cat.php");
-  ?>
+    <!-- CARD -->
+    <?php
+    include("include/card_view_cat.php");
+    ?>
+
+  </main>
 
   <?php
   include("include/footer.php");

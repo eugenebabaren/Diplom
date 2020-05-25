@@ -1,5 +1,4 @@
 <?php
-$error = array();
 
 $name = clearString($_POST["review_modal_name"]);
 $good = clearString($_POST["review_modal_good"]);

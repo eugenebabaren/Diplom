@@ -51,72 +51,76 @@ include("include/auth_cookie.php");
 
     </header>
 
+    <main>
 
+        <!-- ФОРМА ВХОД -->
+        <form method="POST" id="form_login" action="" class="my-text-center text-center border border-light p-5">
 
-    <!-- ФОРМА ВХОД -->
-    <form method="POST" id="form_login" action="" class="my-text-center text-center border border-light p-5">
+            <p class="h4 mb-4 mt-4 font-weight-bold">Вход</p>
 
-        <p class="h4 mb-4 mt-3 font-weight-bold">Вход</p>
+            <p id="message-auth" class="h5 mb-4" hidden>Неверный логин и (или) пароль!</p>
 
-        <p id="message-auth" class="h5 mb-4" hidden>Неверный логин и (или) пароль!</p>
+            <input type="text" name="auth_login" id="sign_login" class="form-control mb-4" placeholder="Введите логин или e-mail">
 
-        <input type="text" name="auth_login" id="sign_login" class="form-control mb-4" placeholder="Введите логин или e-mail">
+            <!-- Password -->
+            <input type="password" name="auth_pass" id="sign_pass" class="form-control" placeholder="Введите пароль" aria-describedby="defaultLoginFormPasswordHelpBlock">
 
-        <!-- Password -->
-        <input type="password" name="auth_pass" id="sign_pass" class="form-control" placeholder="Введите пароль" aria-describedby="defaultLoginFormPasswordHelpBlock">
-
-        <div class="remem_me_forgot_pass d-flex justify-content-between mt-3">
-            <div>
-                <a href="" id="remind_pass_but" data-toggle="modal" data-target="#modalLoginForm">Забыли пароль?</a>
+            <div class="remem_me_forgot_pass d-flex justify-content-between mt-3">
+                <div>
+                    <a href="" id="remind_pass_but" data-toggle="modal" data-target="#modalLoginForm">Забыли пароль?</a>
+                </div>
             </div>
-        </div>
 
-        <!-- Sign up button -->
-        <button name="sign_submit" id="form_submit" class="btn btn-success my-4 btn mt-6" type="submit">Вход</button>
+            <!-- Sign up button -->
+            <button name="sign_submit" id="form_submit" class="btn btn-success my-4 btn mt-6" type="submit">Вход</button>
 
-    </form>
-    <!-- Default form register -->
-
+        </form>
+        <!-- Default form register -->
 
 
-    <!-- ФОРМА ЗАБЫЛИ ПАРОЛЬ? -->
-    <form method="POST" id="form_remind_pass" action="" >
-        <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title w-100 font-weight-bold ml-3">Восстановление пароля</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body mx-3">
-                        <div class="md-form mb-3">
-                            <i class="fas fa-envelope prefix grey-text my-1 pr-4"></i>
-                            <input type="text" name="remind_pass_email" class="form-control validate my-3">
-                            <label data-error="wrong" data-success="right" for="remind_pass_email">E-mail</label>
-                            <small id="forgotPassHelpBlock" class="form-text mb-3">
-                                ( Введите почтовый ящик указанный при регистрации )
-                            </small>
-                            <small id="error_forgotPassHelpBlock" class="form-text lead" hidden>
-                                Такого e-mail не существует или вы ничего не ввели!
-                            </small>
+
+        <!-- ФОРМА ЗАБЫЛИ ПАРОЛЬ? -->
+        <form method="POST" id="form_remind_pass" action="">
+            <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title w-100 font-weight-bold ml-3">Восстановление пароля</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
-                    </div>
-                    <div class="modal-footer d-flex justify-content-center">
-                        <button type="submit" name="remind_pass_submit" class="btn btn-success">Отправить</button>
+                        <div class="modal-body mx-3">
+                            <div class="md-form mb-3">
+                                <i class="fas fa-envelope prefix grey-text my-1 pr-4"></i>
+                                <input type="text" name="remind_pass_email" class="form-control validate my-3">
+                                <label data-error="wrong" data-success="right" for="remind_pass_email">E-mail</label>
+                                <small id="forgotPassHelpBlock" class="form-text mb-3">
+                                    ( Введите почтовый ящик указанный при регистрации )
+                                </small>
+                                <small id="error_forgotPassHelpBlock" class="form-text lead" hidden>
+                                    Такого e-mail не существует или вы ничего не ввели!
+                                </small>
+                            </div>
+                        </div>
+                        <div class="modal-footer d-flex justify-content-center">
+                            <button type="submit" name="remind_pass_submit" class="btn btn-success">Отправить</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </form>
+        </form>
 
 
+
+        <?php
+
+        include("include/remind_pass.php");
+        ?>
+
+    </main>
 
     <?php
-
-    include("include/remind_pass.php");
-
     include("include/footer.php");
     ?>
 

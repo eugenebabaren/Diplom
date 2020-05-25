@@ -51,21 +51,24 @@ include("include/sorting.php");
 
   </header>
 
+  <main>
 
-  <?php
-  include("include/sidebar.php");
-  ?>
+    <?php
+    include("include/sidebar.php");
+    ?>
 
-  <!-- FINDER -->
-  <?php
-  include("include/finder.php");
-  ?>
+    <!-- FINDER -->
+    <?php
+    include("include/finder.php");
+    ?>
 
 
-  <!-- CARD -->
-  <?php
-  include("include/card.php");
-  ?>
+    <!-- CARD -->
+    <?php
+    include("include/card_search.php");
+    ?>
+
+  </main>
 
   <?php
   include("include/footer.php");

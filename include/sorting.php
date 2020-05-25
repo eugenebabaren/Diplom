@@ -16,31 +16,34 @@ switch ($sorting) {
     $sorting = 'count DESC';
     $sort_name = 'Популярные';
     break;
-  
+
+  case 'availability':
+    $sorting = 'availability DESC';
+    $sort_name = 'По наличию';
+    break;
+
   case 'new':
     $sorting = 'datetime DESC';
     $sort_name = 'По новизне';
     break;
-  
+
   case 'from-a-to-z':
     $sorting = 'brand ASC';
     $sort_name = 'От А до Я';
     break;
-  
+
   case 'from-z-to-a':
     $sorting = 'brand DESC';
     $sort_name = 'От Я до А';
     break;
-  
+
   case 'without-sorting':
     $sorting = 'products_id DESC';
     $sort_name = 'Без сортировки';
     break;
 
   default:
-  $sorting = 'products_id DESC';
+    $sorting = 'products_id DESC';
     $sort_name = 'Без сортировки';
     break;
 }
-
-?>

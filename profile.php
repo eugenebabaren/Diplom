@@ -3,23 +3,14 @@
 include("include/db_connect.php");
 include("functions/functions.php");
 session_start();
-// error_reporting(-1);
 
 include("include/auth_cookie.php");
 
-//ДАННЫЕ ДЛЯ КАБИНЕТА
+if ($_SESSION['auth'] == 'yes_auth') {
 
-// if (isset($_SESSION['auth_login'])) {
-//     echo '<script>
-//     document.addEventListener("DOMContentLoaded", function() {
-
-//             let sdfg = document.getElementById("reg_login");
-//             sdfg.value = "' . $_SESSION["auth_login"] . '";
-
-//         });
-//     </script>
-//     ';
-// }
+} else {
+    header("Location: index.php");
+}
 
 ?>
 
@@ -61,86 +52,86 @@ include("include/auth_cookie.php");
 
     </header>
 
+    <main>
 
+        <form method="POST" id="form_profile" action="" class="my-text-center text-center border border-light p-5">
+            <!-- Default form register -->
 
-    <form method="POST" id="form_profile" action="" class="my-text-center text-center border border-light p-5">
-        <!-- Default form register -->
+            <p id="profile_message" class="h4 mb-4"></p>
 
-        <p id="profile_message" class="h4 mb-4"></p>
-
-        <!-- <a href="sign_in.php">
+            <!-- <a href="sign_in.php">
             <button id="auth_but" type="button" class="btn btn-success my-4 btn mt-6" hidden>Вход</button>
         </a> -->
 
-        <div id="form-profile">
+            <div id="form-profile">
 
-            <p class="h4 mb-4 font-weight-bold">Изменение профиля</p>
+                <p class="h4 mb-4 font-weight-bold">Изменение профиля</p>
 
-            <p id="message-success-edit" class="h5 mb-4 text-success" hidden>Данные успешно изменены!</p>
-
-
-            <label for="profile_current_pass">Текущий пароль</label>
-            <input type="password" name="profile_current_pass" id="profile_current_pass" class="form-control mb-4" placeholder="Текущий пароль">
-            <small id="loginHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_new_pass">Новый пароль</label>
-            <input type="password" name="profile_new_pass" id="profile_new_pass" class="form-control mb-2" placeholder="Новый пароль" aria-describedby="passwordHelpBlock">
-            <small id="passwordHelpBlock" class="form-text text-muted mb-4">
-                Новый пароль должен быть от 8 до 15 символов латиницей и цифрами!
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_surname">Фамилия</label>
-            <input type="text" name="profile_surname" id="profile_surname" class="form-control mb-4" placeholder="Фамилия">
-            <small id="surnameHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_name">Имя</label>
-            <input type="text" name="profile_name" id="profile_name" class="form-control mb-4" placeholder="Имя">
-            <small id="nameHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_patronymic">Отчество</label>
-            <input type="text" name="profile_patronymic" id="profile_patronymic" class="form-control mb-4" placeholder="Отчество">
-            <small id="patronymicHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_email">E-mail</label>
-            <input type="text" name="profile_email" id="profile_email" class="form-control mb-4" placeholder="E-mail">
-            <small id="emailHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_phone">Телефон</label>
-            <input type="text" name="profile_phone" id="profile_phone" class="form-control mb-4" aria-describedby="defaultRegisterFormPhoneHelpBlock" placeholder="Телефон">
-            <small id="phoneHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <label data-error="wrong" data-success="right" for="profile_address">Адрес доставки</label>
-            <input type="text" name="profile_address" id="profile_address" class="form-control mb-4" placeholder="Адрес доставки">
-            <small id="addressHelpBlock" class="form-text mb-4" hidden>
-                At least 8 characters and 1 digit
-            </small>
-
-            <!-- Sign up button -->
-            <button type="submit" name="profile_form_submit" id="profile_form_submit" class="btn btn-success my-4 btn mt-6">Сохранить</button>
-        </div>
+                <p id="message-success-edit" class="h5 mb-4 text-success" hidden>Данные успешно изменены!</p>
 
 
-    </form>
+                <label for="profile_current_pass">Текущий пароль</label>
+                <input type="password" name="profile_current_pass" id="profile_current_pass" class="form-control mb-4" placeholder="Текущий пароль">
+                <small id="loginHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_new_pass">Новый пароль</label>
+                <input type="password" name="profile_new_pass" id="profile_new_pass" class="form-control mb-2" placeholder="Новый пароль" aria-describedby="passwordHelpBlock">
+                <small id="passwordHelpBlock" class="form-text text-muted mb-4">
+                    Новый пароль должен быть от 8 до 15 символов латиницей и цифрами!
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_surname">Фамилия</label>
+                <input type="text" name="profile_surname" id="profile_surname" class="form-control mb-4" placeholder="Фамилия">
+                <small id="surnameHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_name">Имя</label>
+                <input type="text" name="profile_name" id="profile_name" class="form-control mb-4" placeholder="Имя">
+                <small id="nameHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_patronymic">Отчество</label>
+                <input type="text" name="profile_patronymic" id="profile_patronymic" class="form-control mb-4" placeholder="Отчество">
+                <small id="patronymicHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_email">E-mail</label>
+                <input type="text" name="profile_email" id="profile_email" class="form-control mb-4" placeholder="E-mail">
+                <small id="emailHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_phone">Телефон</label>
+                <input type="text" name="profile_phone" id="profile_phone" class="form-control mb-4" aria-describedby="defaultRegisterFormPhoneHelpBlock" placeholder="Телефон">
+                <small id="phoneHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <label data-error="wrong" data-success="right" for="profile_address">Адрес доставки</label>
+                <input type="text" name="profile_address" id="profile_address" class="form-control mb-4" placeholder="Адрес доставки">
+                <small id="addressHelpBlock" class="form-text mb-4" hidden>
+                    At least 8 characters and 1 digit
+                </small>
+
+                <!-- Sign up button -->
+                <button type="submit" name="profile_form_submit" id="profile_form_submit" class="btn btn-success my-4 btn mt-6">Сохранить</button>
+            </div>
 
 
-    <?php
+        </form>
+
+
+        <?php
 
 
 
-    if (isset($_SESSION['auth_login'])) {
-        echo '<script>
+        if (isset($_SESSION['auth_login'])) {
+            echo '<script>
         document.addEventListener("DOMContentLoaded", function() {
 
         document.getElementById("profile_surname").value = "' . $_SESSION["auth_surname"] . '";
@@ -166,15 +157,14 @@ include("include/auth_cookie.php");
         });
         </script>
         ';
-    }
+        }
 
 
-    include("include/edit_profile.php");
+        include("include/edit_profile.php");
+        ?>
+        <!-- Default form register -->
 
-    ?>
-    <!-- Default form register -->
-
-
+    </main>
 
     <?php
     include("include/footer.php");

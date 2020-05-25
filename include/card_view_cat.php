@@ -41,17 +41,52 @@
         <div class="card-body">
 
 
-          <h4 class="card-title"><b>', $row["brand"], '</b></h4>
+          <h4 class="card-title"><b>', $row["brand"], '</b></h4>';
 
-          <p class="card-text">
-            <h6>', $row["title"], '</h6>
-          </p>
-          <h4 class="card-price">', $row["price"], ' руб.</h4>
-
-          <a class="add_to_busket" tid="' . $row["products_id"] . '">
-            <button type="button" class="btn btn-success btn-md ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
-          </a>
-          <button type="button" class="btn btn-danger btn-md mr-0"><i class="fas fa-heart"></i></button>
+          if ($row["availability"] == "1") {
+            echo '
+              
+                <p class="card-text text-success">
+                  В наличии
+                </p>
+              
+              ';
+          } else {
+            echo '
+              
+                <p class="card-text text-danger">
+                  Временно нет
+                </p>
+              
+              ';
+          }
+  
+          echo '
+            <p class="card-text">
+              <h6>', $row["title"], '</h6>
+            </p>
+            <h4 class="card-price">', $row["price"], ' руб.</h4>';
+  
+          if ($row["availability"] == "1") {
+            echo '
+              
+              <a class="add_to_busket" tid="' . $row["products_id"] . '">
+                <button type="button" class="btn btn-success ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
+              </a>
+              
+              ';
+          } else {
+            echo '
+              
+              <a class="add_to_busket">
+                <button disabled type="button" class="btn btn-success ml-0"><i class="fas fa-shopping-basket ml-0 mr-2"></i>В корзину</button>
+              </a>
+              
+              ';
+          }
+  
+  
+          echo '
         </div>
 
       </div>

@@ -4,7 +4,7 @@ include("include/db_connect.php");
 include("functions/functions.php");
 session_start();
 include("include/auth_cookie.php");
-
+// error_reporting(-1);
 include("include/sorting.php");
 
 ?>
@@ -45,21 +45,25 @@ include("include/sorting.php");
 
   </header>
 
-  <?php
-  include("include/sidebar.php");
-  ?>
+  <main>
+
+    <?php
+    include("include/sidebar.php");
+    ?>
 
 
-  <!-- FINDER -->
-  <?php
-  include("include/finder.php");
-  ?>
+    <!-- FINDER -->
+    <?php
+    include("include/finder.php");
+    ?>
 
 
-  <!-- CARD -->
-  <?php
-  include("include/card.php");
-  ?>
+    <!-- CARD -->
+    <?php
+    include("include/card.php");
+    ?>
+
+  </main>
 
   <?php
   include("include/footer.php");

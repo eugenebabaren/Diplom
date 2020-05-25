@@ -11,34 +11,29 @@ include("include/auth_cookie.php");
         <div class="collapse navbar-collapse" id="navbarContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">КАТАЛОГ</a>
+                    <a href="index.php" class="nav-link waves-effect">КАТАЛОГ</a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">О НАС</a>
+                    <a href="about_us.php" class="nav-link waves-effect">О НАС</a>
                 </li>
                 <li class="nav-item mr-2">
                     <a href="#" class="nav-link waves-effect">ОПЛАТА И ДОСТАВКА</a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">КОНТАКТЫ</a>
+                    <a href="contacts.php" class="nav-link waves-effect">КОНТАКТЫ</a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">НОВОСТИ</a>
+                    <a href="news.php" class="nav-link waves-effect">НОВОСТИ</a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">ВОПРОСЫ И ОТВЕТЫ</a>
+                    <a href="faq.php" class="nav-link waves-effect">ВОПРОСЫ И ОТВЕТЫ</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link waves-effect">ОБРАТНАЯ СВЯЗЬ</a>
+                    <a href="feedback.php" class="nav-link waves-effect">ОБРАТНАЯ СВЯЗЬ</a>
                 </li>
             </ul>
             <ul>
                 <ul class="navbar-nav nav-flex-icons mt-3">
-                    <li class="nav-item mr-1">
-                        <a href="#" class="nav-link border border-light rounded waves-effect">
-                            <i class="fas fa-heart"></i>
-                        </a>
-                    </li>
                     <li class="nav-item mr-1">
                         <a href="cart.php?action=oneclick" class="nav-link border border-light rounded waves-effect">
                             <i id="fa-shopping-basket" class="fas fa-shopping-basket badge-wrapper">
