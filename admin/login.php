@@ -11,11 +11,9 @@ if (isset($_POST["admin_sign_submit"])) {
     $pass = clearString($_POST["pass"]);
 
     if ($login && $pass) {
-        // $pass = md5($pass);
+        $pass = md5($pass);
 
-        $result = mysqli_query($link, "SELECT * FROM reg_admin WHERE login = '$login' AND pass = '$pass'");
-        if (mysqli_num_rows($result) > 0) {
-            $row = mysqli_fetch_array($result);
+        if ($login == "admin" && $pass == "25d55ad283aa400af464c76d713c07ad") {
 
             $_SESSION['auth_admin'] = 'yes_auth';
 

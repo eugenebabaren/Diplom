@@ -62,7 +62,7 @@ include("include/auth_cookie.php");
     
             <div class="col-lg-6 text-center text-md-center">
     
-              <h1 class="h1-responsive text-center text-md-left product-name font-weight-bold text-uppercase mb-1 ml-xl-0 mt-5 mb-4"><i class="far fa-newspaper text-danger"></i> ' . $row["title"] . '</h1>
+              <h1 class="h1-responsive text-center text-md-left product-name font-weight-bold text-uppercase mb-1 ml-xl-0 mt-5 mb-4"><i class="far fa-newspaper text-success"></i> ' . $row["title"] . '</h1>
     
               <div class="font-weight-bold mr-3 text-left">
     

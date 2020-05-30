@@ -69,14 +69,14 @@ include("include/auth_cookie.php");
                 </small>
 
                 <div class="form-group">
-                    <textarea class="form-control mb-4" name="feedback_text" id="feedback_text" rows="7" placeholder="Текст сообщения"></textarea>
+                    <textarea class="form-control mb-3" name="feedback_text" id="feedback_text" rows="7" placeholder="Текст сообщения"></textarea>
                 </div>
                 <small id="feedback_textHelpBlock" class="form-text mb-4" hidden>
                     Укажите текст сообщения!
                 </small>
 
                 <!-- Sign up button -->
-                <button type="submit" name="feedback_submit" class="btn btn-success my-4 btn mt-6">Отправить</button>
+                <button type="submit" name="feedback_submit" class="btn btn-success my-4 btn mt-3">Отправить</button>
             </div>
 
         </form>

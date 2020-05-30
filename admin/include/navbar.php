@@ -10,11 +10,11 @@
             </ul>
             <ul>
                 <ul class="navbar-nav nav-flex-icons mt-3">
-                    <li class="nav-item mr-1">
-                        <a href="administrators.php" class="nav-link border border-light rounded waves-effect">
+                    <!-- <li class="nav-item mr-1">
+                        <a href="add_administrators.php" class="nav-link border border-light rounded waves-effect">
                             <b>АДМИНИСТРАТОРЫ</b>
                         </a>
-                    </li>
+                    </li> -->
                     <li class="nav-item mr-1">
                         <a href="?logout" class="nav-link border border-light rounded waves-effect">
                             <b>ВЫХОД</b>

@@ -54,4 +54,47 @@ $(document).ready(function () {
 
     });
 
+    //удаление категории
+    $('.delete-cat').click(function () {
+
+        var selectid = $('#cat option:selected').val();
+
+        $.ajax({
+            type: "POST",
+            url: "delete-category.php",
+            data: "id=" + selectid,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                if(data == "delete") {
+                    $('#cat option:selected').remove();
+                }
+            }
+        });
+
+    });
+
+    //удаление бренда
+    $('.delete-bra').click(function () {
+
+        var selectid = $('#bra option:selected').val();
+
+        $.ajax({
+            type: "POST",
+            url: "delete-brand.php",
+            data: "id=" + selectid,
+            dataType: "html",
+            cache: false,
+            success: function (data) {
+                if(data == "delete") {
+                    $('#bra option:selected').remove();
+                }
+            }
+        });
+
+    });
+
+
+    $("#admin_phone").mask("+375 (99) 999-99-99");
+
 });

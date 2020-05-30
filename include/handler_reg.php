@@ -183,8 +183,10 @@ if (isset($_POST['submit'])) {
 
         $pass = md5($pass);
 
-        if (mysqli_query($link, "INSERT INTO reg_user(login, pass, surname, name, patronymic, email, phone, address)
-         values('$login','$pass','$surname','$name','$patronymic','$email','$phone','$address');")) {
+        $ip = $_SERVER["REMOTE_ADDR"];
+
+        if (mysqli_query($link, "INSERT INTO reg_user(login, pass, surname, name, patronymic, email, phone, address, datetime, ip)
+         values('$login','$pass','$surname','$name','$patronymic','$email','$phone','$address',NOW(),'$ip');")) {
             $_SESSION['login'] = $_REQUEST['login'];
             $_SESSION['pass'] = $_REQUEST['pass'];
             $_SESSION['surname'] = $_REQUEST['surname'];

@@ -17,6 +17,60 @@ switch ($action) {
         break;
 }
 
+
+//подтверждение заказа
+if (isset($_POST['submit_order'])) {
+
+    if ($_SESSION['auth'] == 'yes_auth') {
+        mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
+        values(NOW(),
+               'no',
+               '" . $_SESSION["order_delivery"] . "',
+               '" . $_SESSION["auth_surname"] . " ' '" . $_SESSION["auth_name"] . " ' '" . $_SESSION["auth_patronymic"] . "',
+               '" . $_SESSION["auth_address"] . "',
+               '" . $_SESSION["auth_phone"] . "',
+               '" . $_SESSION["order_note"] . "',
+               '" . $_SESSION["auth_email"] . "'
+               )");
+    } else {
+        mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
+        values(NOW(),
+               'no',
+               '" . $_SESSION["order_delivery"] . "',
+               '" . $_SESSION["order_fio"] . "',
+               '" . $_SESSION["order_address"] . "',
+               '" . $_SESSION["order_phone"] . "',
+               '" . $_SESSION["order_note"] . "',
+               '" . $_SESSION["order_email"] . "'
+               )");
+    }
+
+
+    $_SESSION["order_id"] = mysqli_insert_id($link);
+
+    $result = mysqli_query($link, "SELECT * FROM cart WHERE cart_ip = '{$_SERVER['REMOTE_ADDR']}'");
+    if (mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_array($result);
+
+        do {
+            mysqli_query($link, "INSERT INTO buy_products(buy_id_order,buy_id_product,buy_count_product)
+            values('" . $_SESSION["order_id"] . "',
+                   '" . $row["cart_id_products"] . "',
+                   '" . $row["cart_count"] . "'
+                   )");
+        } while ($row = mysqli_fetch_array($result));
+    }
+
+    echo '
+                <script>
+
+                    localStorage.success_order_mes = 1;
+
+                </script>
+                ';
+}
+
+
 if (isset($_POST['submitdata'])) {
 
     setlocale(LC_ALL, "ru_RU.UTF-8");
@@ -501,8 +555,37 @@ if (isset($_POST['submitdata'])) {
 
 
 
-
+            //3 СТАДИЯ
             case 'completion':
+
+                //сообщение об успешном заказе
+                echo '
+                <script>
+                document.addEventListener("DOMContentLoaded", function() {
+                    if(localStorage.success_order_mes == 1){
+                        let success_order_mes = document.getElementById("success_order_mes");
+                        success_order_mes.hidden = false;
+                        let submit_order = document.getElementById("submit_order");
+                        submit_order.hidden = true;
+                    }
+                });
+                </script>
+                ';
+
+                //удаление сообщения об успешном заказе
+                echo '
+                <script>
+
+                    function sayHi() {
+                        delete localStorage.success_order_mes;
+                    }
+                    
+                    setTimeout(sayHi, 3000);
+
+                </script>
+                ';
+
+
                 echo '
 
         <div class="cart-progress-line container-fluid">
@@ -521,7 +604,10 @@ if (isset($_POST['submitdata'])) {
                 <h5 class="font-weight-bold mt-2 text-success">3. Подтверждение</h5>
             </div>
         </div>
-        </div>';
+        </div>
+        
+        <form method="POST">
+        ';
 
                 if ($_SESSION['auth'] == 'yes_auth') {
                     $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
@@ -539,7 +625,10 @@ if (isset($_POST['submitdata'])) {
             <div class="card mb-3 wow fadeIn">
 
                 <ul class="list-group list-group-flush">
-                    <li class="ml-4 mt-3 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    <li class="ml-4 mt-3 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    <h3 id="success_order_mes" hidden><span class="font-weight-bold text-success">Заказ успешно подтвержден.<br> В ближайшее время с вами свяжется наш менеджер.</h3>
+                    </li>
+                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Способ доставки: </span>' . $_SESSION['order_delivery'] . '</h5>
                     </li>
                     <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
@@ -568,7 +657,7 @@ if (isset($_POST['submitdata'])) {
                         <h5><span class="font-weight-bold">Итого: </span>' . $total_price_cart . ' руб.</h5>
                     </li>
                 </ul>
-            
+                <button type="submit" id="submit_order" name="submit_order" class="btn btn-success btn-block waves-effect waves-light m-4 w-25">Подтвердить заказ</button>
             </div>
         </div>';
                 } else {
@@ -589,7 +678,10 @@ if (isset($_POST['submitdata'])) {
 
             
                 <ul class="list-group list-group-flush">
-                    <li class="ml-4 mt-3 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    <li class="ml-4 mt-3 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
+                    <h3 id="success_order_mes" hidden><span class="font-weight-bold text-success">Заказ успешно подтвержден.<br> В ближайшее время с вами свяжется наш менеджер.</h3>
+                    </li>
+                    <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
                     <h5><span class="font-weight-bold">Способ доставки: </span>' . $_SESSION['order_delivery'] . '</h5>
                     </li>
                     <li class="ml-4 mb-2 list-group-item d-flex justify-content-left align-items-center border-0 px-0 pb-0">
@@ -617,7 +709,8 @@ if (isset($_POST['submitdata'])) {
                         <h5><span class="font-weight-bold">Итого: </span>' . $total_price_cart . ' руб.</h5>
                     </li>
                 </ul>
-            
+                <button type="submit" id="submit_order" name="submit_order" class="btn btn-success btn-block waves-effect waves-light m-4 w-25">Подтвердить заказ</button>
+                </form>
             </div>
         </div>';
                 }

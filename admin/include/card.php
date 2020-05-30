@@ -31,9 +31,9 @@
 
         <div class="view overlay">
           <img id="card-image" class="card-img-top" src="../images/', $row["image"], '" alt="Card image cap">
-          <a href="view_content.php?id=' . $row["products_id"] . '">
+
             <div class="mask rgba-white-slight"></div>
-          </a>
+
           <div class="dropdown-divider"></div>
         </div>
 

@@ -14,8 +14,10 @@ if ($_SESSION['auth_admin'] == 'yes_auth') {
 }
 
 
+$id = clearString($_GET["id"]);
 
-if (isset($_POST['add_product_form_submit'])) {
+
+if (isset($_POST['edit_product_form_submit'])) {
 
     setlocale(LC_ALL, "ru_RU.UTF-8");
 
@@ -243,21 +245,16 @@ if (isset($_POST['add_product_form_submit'])) {
                     $message = "Загружаемый файл был получен только частично";
                     break;
                 case 4:
-                    $error[] = "Файл не был загружен";
+                    $old_image = mysqli_query($link, "SELECT * FROM products WHERE products_id='$id'");
+                            if (mysqli_num_rows($old_image) > 0) {
+                                $result_old_image = mysqli_fetch_array($old_image);
 
-                    echo '<script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        let mes6 = document.getElementById("imageHelpBlock");
-                        let inp6 = document.getElementById("image");
-                        mes6.innerHTML = "Файл не был загружен";
-                        mes6.style.color = "red";
-                        mes6.hidden = false;
-                        inp6.classList.remove("mb-4");
-                        inp6.classList.add("mb-2");
-                    });
-                    </script>
-                    ';
-                    $message = "Файл не был загружен";
+                                do {
+                                    $newfilename = $result_old_image["image"];
+
+                                } while ($result_old_image = mysqli_fetch_array($old_image));
+                            }
+                    
                     break;
                 case 6:
                     $error[] = "Отсутствует временная папка";
@@ -378,26 +375,12 @@ if (isset($_POST['add_product_form_submit'])) {
     }
 
 
-    //ДОБАВЛЕНИЕ
+    //изменение
     if (empty($error)) {
 
-        mysqli_query($link, "INSERT INTO products(title, price, brand, image, description, country, energy_value, storage_conditions, datetime, availability, visible, product_type)
-            values('" . $_POST["title"] . "',
-                   '" . $_POST["price"] . "',
-                   '" . $_POST["brand"] . "',
-                   '" . $newfilename . "',
-                   '" . $_POST["description"] . "',
-                   '" . $_POST["country"] . "',
-                   '" . $_POST["energy_value"] . "',
-                   '" . $_POST["storage_conditions"] . "',
-                   NOW(),
-                   '" . $_POST["availability"] . "',
-                   '" . $_POST["visible"] . "',
-                   '" . $_POST["category"] . "'
+        $edit_query = "title='{$_POST["title"]}',price='{$_POST["price"]}',brand='{$_POST["brand"]}',image='{$newfilename}',description='{$_POST["description"]}',country='{$_POST["country"]}',energy_value='{$_POST["energy_value"]}',storage_conditions='{$_POST["storage_conditions"]}',availability='{$_POST["availability"]}',visible='{$_POST["visible"]}',product_type='{$_POST["category"]}'";
 
-                    )");
-
-        header("Location: tovar.php");
+        $update = mysqli_query($link, "UPDATE products SET $edit_query WHERE products_id='$id'");
     }
 }
 
@@ -450,27 +433,37 @@ if (isset($_POST['add_product_form_submit'])) {
             <!-- <div class="container-fluid d-flex"> -->
             <div class="card mb-3wow fadeIn text-align-center">
                 <div class="col-auto ml-1 mt-2">
-                    <form method="POST" enctype="multipart/form-data" id="form_profile" class="ml-4">
+                    <?php
+                    $result = mysqli_query($link, "SELECT * FROM products WHERE products_id='$id'");
+
+                    if (mysqli_num_rows($result) > 0) {
+                        $row = mysqli_fetch_array($result);
+
+                        do {
+
+
+                            echo '
+                        <form method="POST" enctype="multipart/form-data" id="form_profile" class="ml-4">
                         <!-- Default form register -->
 
                         <p id="profile_message" class="h4 mb-4"></p>
 
                         <div id="form-profile">
 
-                            <p class="h4 mb-4 font-weight-bold">Добавление товара</p>
+                            <p class="h4 mb-4 font-weight-bold">Изменение товара</p>
 
                             <p id="message-success-edit" class="h5 mb-4 text-success" hidden>Данные успешно изменены!</p>
 
 
                             <label data-error="wrong" data-success="right" for="title">Название товара</label>
-                            <input type="text" name="title" id="title" class="form-control mb-4 w-75" placeholder="Название товара" autocomplete="off">
+                            <input type="text" name="title" id="title" class="form-control mb-4 w-75" placeholder="Название товара" autocomplete="off" value="' . $row["title"] . '">
                             <small id="titleHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
 
 
                             <label data-error="wrong" data-success="right" for="price">Цена</label>
-                            <input type="text" name="price" id="price" class="form-control mb-4 w-75" placeholder="Цена">
+                            <input type="text" name="price" id="price" class="form-control mb-4 w-75" placeholder="Цена" value="' . $row["price"] . '">
                             <small id="priceHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
@@ -480,22 +473,24 @@ if (isset($_POST['add_product_form_submit'])) {
                             <div class="row">
 
                                 <select name="category" id="category" class="form-control mb-4 ml-3 w-50">
-                                    <?php
 
-                                    $category = mysqli_query($link, "SELECT * FROM category GROUP BY category");
-                                    if (mysqli_num_rows($category) > 0) {
-                                        $result_category = mysqli_fetch_array($category);
+                                <option value="' . $row["product_type"] . '">' . $row["product_type"] . '</option>';
 
-                                        do {
+                            $category = mysqli_query($link, "SELECT * FROM category GROUP BY category");
+                            if (mysqli_num_rows($category) > 0) {
+                                $result_category = mysqli_fetch_array($category);
 
-                                            echo '
+                                do {
+
+                                    if ($result_category["category"] != $row["product_type"]) {
+                                        echo '
                                         <option value="' . $result_category["category"] . '">' . $result_category["category"] . '</option>
                                         ';
-                                        } while ($result_category = mysqli_fetch_array($category));
                                     }
+                                } while ($result_category = mysqli_fetch_array($category));
+                            }
 
-                                    ?>
-
+                            echo '
                                 </select>
                                 <a href="category.php" class="mt-2 ml-4 pl-1 text-success">
                                     <h6>Добавить категорию</h6>
@@ -506,21 +501,25 @@ if (isset($_POST['add_product_form_submit'])) {
                             <label data-error="wrong" data-success="right" for="brand">Бренд</label>
                             <div class="row">
                                 <select name="brand" id="brand" class="form-control mb-4 ml-3 w-50">
-                                    <?php
+                                
+                                <option value="' . $row["brand"] . '">' . $row["brand"] . '</option>
+                                ';
 
-                                    $brand = mysqli_query($link, "SELECT * FROM brand GROUP BY brand");
-                                    if (mysqli_num_rows($brand) > 0) {
-                                        $result_brand = mysqli_fetch_array($brand);
+                            $brand = mysqli_query($link, "SELECT * FROM brand GROUP BY brand");
+                            if (mysqli_num_rows($brand) > 0) {
+                                $result_brand = mysqli_fetch_array($brand);
 
-                                        do {
+                                do {
 
-                                            echo '
+                                    if ($result_brand["brand"] != $row["brand"]) {
+                                        echo '
                                         <option value="' . $result_brand["brand"] . '">' . $result_brand["brand"] . '</option>
                                         ';
-                                        } while ($result_brand = mysqli_fetch_array($brand));
                                     }
+                                } while ($result_brand = mysqli_fetch_array($brand));
+                            }
 
-                                    ?>
+                            echo '
                                 </select>
                                 <a href="brand.php" class="mt-2 ml-4 pl-1 text-success">
                                     <h6>Добавить бренд</h6>
@@ -529,10 +528,11 @@ if (isset($_POST['add_product_form_submit'])) {
 
 
                             <label class="mb-1">Изображение</label>
-
+                            
                             <div class="row">
-                                <span class="output" id="output"></span>
+                                <span class="output" id="output"><img id="outIMG" src="../images/' . $row["image"] . '" class="w-25 img-fluid m-3"></span>
                             </div>
+                            
                             <div class="custom-file mb-4" id="image">
                                 <input name="MAX_FILE_SIZE" type="hidden" value="5000000">
                                 <input id="upload_image" name="upload_image" type="file" class="custom-file-input w-75" lang="ru" accept="image/jpg,image/jpeg,image/png">
@@ -544,56 +544,81 @@ if (isset($_POST['add_product_form_submit'])) {
 
 
                             <label data-error="wrong" data-success="right" for="description">Описание</label>
-                            <textarea class="form-control mb-4 w-75" name="description" id="description" rows="4" placeholder="Описание"></textarea>
+                            <textarea class="form-control mb-4 w-75" name="description" id="description" rows="4" placeholder="Описание">' . $row["description"] . '</textarea>
                             <small id="descriptionHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
 
 
-                            <?php
-
-                            ?>
                             <label data-error="wrong" data-success="right" for="country">Страна</label>
-                            <input type="text" name="country" id="country" class="form-control mb-4 w-75" placeholder="Страна">
+                            <input type="text" name="country" id="country" class="form-control mb-4 w-75" placeholder="Страна" value="' . $row["country"] . '">
                             <small id="countryHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
 
 
                             <label data-error="wrong" data-success="right" for="energy_value">Энергетическая ценность (ккал на 100 г)</label>
-                            <input type="text" name="energy_value" id="energy_value" class="form-control mb-4 w-75" placeholder="Энергетическая ценность">
+                            <input type="text" name="energy_value" id="energy_value" class="form-control mb-4 w-75" placeholder="Энергетическая ценность" value="' . $row["energy_value"] . '">
                             <small id="energy_valueHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
 
 
                             <label data-error="wrong" data-success="right" for="storage_conditions">Условия хранения</label>
-                            <textarea type="text" name="storage_conditions" id="storage_conditions" class="form-control mb-4 w-75" placeholder="Условия хранения" rows="2"></textarea>
+                            <textarea type="text" name="storage_conditions" id="storage_conditions" class="form-control mb-4 w-75" placeholder="Условия хранения" rows="2">' . $row["storage_conditions"] . '</textarea>
                             <small id="storage_conditionsHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
 
 
                             <label data-error="wrong" data-success="right" for="availability">Наличие</label>
-                            <select name="availability" id="availability" class="form-control mb-4 w-75">
-                                <option value="1">В наличии</option>
-                                <option value="0">Временно нет</option>
+                            <select name="availability" id="availability" class="form-control mb-4 w-75">';
+
+                            if ($row["availability"] == "1") {
+                                echo '
+                                    <option value="1">В наличии</option>
+                                    ';
+                            } else {
+                                echo '
+                                    <option value="0">Временно нет</option>
+                                    ';
+                            }
+
+                            echo '
                             </select>
 
 
                             <label data-error="wrong" data-success="right" for="visible">Показывать товар</label>
                             <select name="visible" id="visible" class="form-control mb-3 w-75">
-                                <option value="1">Да</option>
-                                <option value="0">Нет</option>
+                            ';
+
+                            if ($row["visible"] == "1") {
+                                echo '
+                                    <option value="1">Да</option>
+                                    ';
+                            } else {
+                                echo '
+                                    <option value="0">Нет</option>
+                                    ';
+                            }
+
+                            echo '
+
                             </select>
 
 
                             <!-- Sign up button -->
-                            <button type="submit" name="add_product_form_submit" id="add_product_form_submit" class="btn btn-success mt-3 mb-5">Добавить</button>
+                            <button type="submit" name="edit_product_form_submit" id="edit_product_form_submit" class="btn btn-success mt-3 mb-5">Изменить</button>
                         </div>
 
 
                     </form>
+                      
+                      ';
+                        } while ($row = mysqli_fetch_array($result));
+                    }
+                    ?>
+
                 </div>
             </div>
         </div>
