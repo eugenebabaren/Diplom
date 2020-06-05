@@ -23,7 +23,7 @@ switch ($sort) {
 
     case 'no-confirmed':
         $sort = "order_confirmed='no' DESC";
-        $sort_name = 'Не обработанные';
+        $sort_name = 'Необработанные';
         break;
 
     default:

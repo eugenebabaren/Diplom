@@ -95,7 +95,7 @@ $type = $_GET["type"];
         }
 
         if (!empty($check_brand)) {
-          $query_brand = "AND brand IN ('$check_brand')";
+          $query_brand = "AND products.brand IN ('$check_brand')";
         }
 
 
@@ -107,7 +107,7 @@ $type = $_GET["type"];
           $query_type = "AND product_type IN ('$check_type')";
         }
 
-        $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $query_type $query_brand ORDER BY products_id DESC");
+        $result = mysqli_query($link, "SELECT * FROM products,brand WHERE brand.id = products.brand AND visible='1' $query_type $query_brand ORDER BY products_id DESC");
 
         if (mysqli_num_rows($result) > 0) {
           $row = mysqli_fetch_array($result);
@@ -119,6 +119,15 @@ $type = $_GET["type"];
         <div class="col mb-4 pr-2">
 
         <div class="card">
+        <div class="row mb-3 mt-2">
+            <a href="edit_product.php?id=' . $row["products_id"] . '" class="ml-auto pb-0 mt-2">
+              <button type="button" class="btn btn-block btn-success"><i class="fas fa-pen"></i></button>
+            </a>
+
+            <a rel="tovar.php?' . $url . 'id=' . $row["products_id"] . '&action=delete" class="delete mr-auto pt-0 mt-2">
+              <button type="button" class="btn btn-block btn-danger"><i class="far fa-trash-alt"></i></button>
+            </a>
+        </div>
   
           <div class="view overlay">
             <img id="card-image" class="card-img-top" src="../images/', $row["image"], '" alt="Card image cap">
@@ -157,16 +166,7 @@ $type = $_GET["type"];
                 <h6>', $row["title"], '</h6>
               </p>
               <h4 class="card-price">', $row["price"], ' руб.</h4>
-              
-              <div class="modal-footer border-0 d-flex justify-content-between pl-0 pr-0">
-                <a href="edit_product.php?id=' . $row["products_id"] . '" class="btn-block ml-auto mr-auto pb-0 mb-0">
-                  <button type="button" class="btn btn-block btn-success">Изменить</button>
-                </a>
 
-                <a rel="tovar.php?' . $url . 'id=' . $row["products_id"] . '&action=delete" class="delete btn-block ml-auto mr-auto pt-0 mt-2">
-                  <button type="button" class="btn btn-block btn-danger">Удалить</button>
-                </a>
-              </div>
               ';
 
 
@@ -195,11 +195,6 @@ $type = $_GET["type"];
     </div>
 
   </main>
-
-  <?php
-  include("include/footer.php");
-  ?>
-
 
 
   <!-- jQuery -->

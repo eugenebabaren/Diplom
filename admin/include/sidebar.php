@@ -2,11 +2,11 @@
   <div class="height-sidebar cart-progress-line card mb-3 wow fadeIn pr-5 d-flex">
     <div class="row ml-4 mt-3 mb-3">
 
-      <ul class="list-group list-group-flush lead mr-1 pr-5">
+      <ul class="col list-group list-group-flush lead mr-1">
         <a href="tovar.php" class="text-dark list-group-item list-group-item-action">
           <span class="mr-2">Товары</span>
         </a>
-        <a href="orders.php" class="text-dark list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <a href="orders.php" class="text-dark list-group-item list-group-item-action">
           <span class="mr-2">Заказы</span>
           <?php
           $no_buy_count = mysqli_query($link, "SELECT * FROM orders WHERE order_confirmed='no'");
@@ -20,7 +20,7 @@
           ?>
         </a>
 
-        <a href="reviews.php" class="text-dark list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+        <a href="reviews.php" class="text-dark list-group-item list-group-item-action">
           <span class="mr-2">Отзывы</span>
           <?php
           $plus_reviews = mysqli_query($link, "SELECT * FROM reviews WHERE moderat='0'");
@@ -44,6 +44,19 @@
         </a>
         <a href="brand.php" class="text-dark list-group-item list-group-item-action">
           <span class="mr-2">Бренды</span>
+        </a>
+        <a href="feedback.php" class="text-dark list-group-item list-group-item-action">
+          <span class="mr-2">Обратная связь</span>
+          <?php
+          $plus_feedback = mysqli_query($link, "SELECT * FROM feedback WHERE confirmed='no'");
+          $plus_feedback_result = mysqli_num_rows($plus_feedback);
+
+          if ($plus_feedback_result > 0) {
+            echo '
+              <span class="badge badge-danger badge-pill pb-1">+' . $plus_feedback_result . '</span>
+            ';
+          }
+          ?>
         </a>
       </ul>
 

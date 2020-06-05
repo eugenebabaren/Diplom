@@ -77,7 +77,7 @@ include("include/sorting.php");
         }
 
         if (!empty($check_brand)) {
-          $query_brand = "AND brand IN ('$check_brand')";
+          $query_brand = "AND products.brand IN ('$check_brand')";
         }
 
 
@@ -89,7 +89,7 @@ include("include/sorting.php");
           $query_country = "AND country IN ('$check_country')";
         }
 
-        $result = mysqli_query($link, "SELECT * FROM products WHERE visible='1' $query_country $query_brand ORDER BY products_id DESC");
+        $result = mysqli_query($link, "SELECT * FROM products,brand WHERE brand.id = products.brand AND visible='1' $query_country $query_brand ORDER BY products_id DESC");
 
         if (mysqli_num_rows($result) > 0) {
           $row = mysqli_fetch_array($result);

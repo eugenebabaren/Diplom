@@ -200,11 +200,37 @@ $(document).ready(function () {
         });
     }
 
-        //закрытие модального окна "забыли пароль?"
-        $("#modalReviewForm").on('hide.bs.modal', function () {
-            document.getElementById("nameHelpBlock").hidden = true;
-            document.getElementById("goodHelpBlock").hidden = true;
-            document.getElementById("badHelpBlock").hidden = true;
+    //закрытие модального окна "забыли пароль?"
+    $("#modalReviewForm").on('hide.bs.modal', function () {
+        document.getElementById("nameHelpBlock").hidden = true;
+        document.getElementById("goodHelpBlock").hidden = true;
+        document.getElementById("badHelpBlock").hidden = true;
+    });
+
+    //подтверждение удаления
+    $('.delete').click(function () {
+
+        var rel = $(this).attr("rel");
+
+        $.confirm({
+            title: 'Подтверждение удаления',
+            content: 'После удаления восстановление будет невозможно! Продолжить?',
+            buttons: {
+                'Да': {
+                    btnClass: 'btn-green',
+                    action: function () {
+                        location.href = rel;
+                    }
+                },
+                'Нет': {
+                    btnClass: 'btn-red',
+                    action: function () {
+
+                    }
+                },
+            }
         });
+
+    });
 
 });

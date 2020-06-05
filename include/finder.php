@@ -1,5 +1,4 @@
 <div class="finder ml-3 mr-2 mb-0 justify-content-between">
-  <!-- <div class="container-fluid d-flex"> -->
   <div class="card mb-3 wow fadeIn">
     <div class="card-body d-sm-flex">
 
@@ -25,11 +24,9 @@
                   <?php
 
                   $type = $_GET["type"];
-                  if ($type) {
-                    $result = mysqli_query($link, "SELECT * FROM products WHERE product_type='$type' GROUP BY brand");
-                  } else {
-                    $result = mysqli_query($link, "SELECT * FROM products GROUP BY brand");
-                  }
+                 
+                    $result = mysqli_query($link, "SELECT * FROM brand");
+                  
 
 
                   if (mysqli_num_rows($result) > 0) {
@@ -42,7 +39,7 @@
                       $checked_brand = "";
 
                       if ($_GET["brand"]) {
-                        if (in_array($row["brand"], $_GET["brand"])) {
+                        if (in_array($row["id"], $_GET["brand"])) {
                           $checked_brand = "checked";
                         }
                       }
@@ -51,7 +48,7 @@
                   <li>
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
-                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["brand"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
+                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
                         <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . $row["brand"] . '</label>
                       </div>
                     </a>

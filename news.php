@@ -4,7 +4,6 @@ include("include/db_connect.php");
 include("functions/functions.php");
 session_start();
 include("include/auth_cookie.php");
-
 ?>
 
 
@@ -30,6 +29,7 @@ include("include/auth_cookie.php");
     <link rel="stylesheet" href="css/mdb.min.css">
     <!-- Your custom styles (optional) -->
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
     <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 </head>
 
@@ -50,6 +50,8 @@ include("include/auth_cookie.php");
             <div class="card wow fadeIn text-center d-flex mb-3 mt-5">
 
                 <?php
+                setlocale(LC_ALL, "ru_RU.UTF-8");
+
                 $result = mysqli_query($link, "SELECT * FROM news ORDER BY id DESC");
 
                 if (mysqli_num_rows($result) > 0) {
@@ -62,13 +64,24 @@ include("include/auth_cookie.php");
     
             <div class="col-lg-6 text-center text-md-center">
     
-              <h1 class="h1-responsive text-center text-md-left product-name font-weight-bold text-uppercase mb-1 ml-xl-0 mt-5 mb-4"><i class="far fa-newspaper text-success"></i> ' . $row["title"] . '</h1>
+              <a href="view_news.php?id=' . $row["id"] . '" class="text-dark">
+                <h1 class="h1-responsive text-center text-md-left product-name font-weight-bold text-uppercase mb-1 ml-xl-0 mt-5 mb-4"><i class="far fa-newspaper text-success"></i> ' . $row["title"] . '</h1>
+              </a>
     
               <div class="font-weight-bold mr-3 text-left">
     
                 <p class="ml-xl-0 ml-4"><strong>' . $row["date"] . '</strong></p>
 
-                <p class="ml-xl-0 ml-4"><strong>' . $row["text"] . '</strong></p>
+                <p class="ml-xl-0 ml-4"><a data-fancybox="gallery" href="images/' . $row["image"] . '"><img class="card-img-top" src="images/', $row["image"], '" alt="Card image cap"></a></p>
+                
+
+                <p class="ml-xl-0 ml-4"><strong>' . mb_strimwidth($row["text"], 0, 300, "...", "UTF-8") . '</strong></p>
+
+                <p>
+                    <a href="view_news.php?id=' . $row["id"] . '">
+                        <button type="button" class="btn btn-success">Читать далее</button>
+                    </a>
+                </p>
 
               </div>
     
@@ -106,6 +119,7 @@ include("include/auth_cookie.php");
     <script type="text/javascript" src="js/mdb.min.js"></script>
     <!-- Your custom scripts (optional) -->
     <script src="js/jquery.maskedinput.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
     <script type="text/javascript" src="js/script.js"></script>
 
 </body>

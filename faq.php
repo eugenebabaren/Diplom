@@ -59,7 +59,7 @@ $id = clearString($_GET["id"]);
 
                         <h6 class="font-weight-normal text-uppercase font-small grey-text mb-4 text-center">FAQ</h6>
                         <!-- Section heading -->
-                        <h2 class="font-weight-bold black-text mb-4 pb-2 text-center">ЧАСТО ЗАДАВАЕМЫЕ ВОПРОСЫ</h2>
+                        <h2 class="font-weight-bold black-text mb-4 pb-2 text-center">Часто задаваемые вопросы</h2>
                         <hr class="w-header pb-4">
                         <!-- Section description -->
 
@@ -140,6 +140,29 @@ $id = clearString($_GET["id"]);
                                         <div id="collapseThree3" class="collapse" role="tabpanel" aria-labelledby="headingThree3" data-parent="#accordionEx">
                                             <div class="card-body">
                                                 Для того, чтобы сделать заказ, пожалуйста, выберите интересующие вас товары из электронного каталога и добавьте их в корзину. Там укажите нужное количество, введите свою контактную информацию и подтвердите заказ.
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                    <!-- Accordion card -->
+
+                                    <!-- Accordion card -->
+                                    <div class="card border-bottom-0 border-left border-right border-light">
+
+                                        <!-- Card header -->
+                                        <div class="card-header border-bottom border-light" role="tab" id="headingThree5">
+                                            <a class="collapsed" data-toggle="collapse" data-parent="#accordionEx" href="#collapseThree5" aria-expanded="false" aria-controls="collapseThree5">
+                                                <h5 class="black-text font-weight-normal mb-0">
+                                                    <i class="fas fa-angle-down rotate-icon text-success mr-2"></i>
+                                                    Как отменить заказ?
+                                                </h5>
+                                            </a>
+                                        </div>
+
+                                        <!-- Card body -->
+                                        <div id="collapseThree5" class="collapse" role="tabpanel" aria-labelledby="headingThree5" data-parent="#accordionEx">
+                                            <div class="card-body">
+                                                Отменить заказ на сайте может только авторизированный пользователь и только, если заказ находится в статусе "Не обработан". Для того, чтобы отменить заказ, зайдите в свой профиль, перейдите в "Мои заказы". Далее выберите необходимый заказ, нажмите на кнопку "Подробнее" и отмените его.
                                             </div>
                                         </div>
 

@@ -9,7 +9,7 @@ include("include/auth_cookie.php");
 if ($_SESSION['auth'] == 'yes_auth') {
 
 } else {
-    header("Location: index.php");
+    header("Location: exit.php");
 }
 
 ?>
@@ -55,15 +55,13 @@ if ($_SESSION['auth'] == 'yes_auth') {
     <main>
 
         <form method="POST" id="form_profile" action="" class="my-text-center text-center border border-light p-5">
-            <!-- Default form register -->
 
             <p id="profile_message" class="h4 mb-4"></p>
 
-            <!-- <a href="sign_in.php">
-            <button id="auth_but" type="button" class="btn btn-success my-4 btn mt-6" hidden>Вход</button>
-        </a> -->
 
             <div id="form-profile">
+
+
 
                 <p class="h4 mb-4 font-weight-bold">Изменение профиля</p>
 

@@ -5,7 +5,7 @@
 
     if (!empty($cat) && !empty($type)) {
 
-      $querycat = "AND brand='$cat' AND product_type='$type'";
+      $querycat = "AND products.brand='$cat' AND product_type='$type'";
     } else {
       if (!empty($type)) {
         $querycat = "AND product_type='$type'";
@@ -14,7 +14,7 @@
       }
     }
 
-    $result = mysqli_query($link, "SELECT * FROM products WHERE (title LIKE '%$search%' OR brand LIKE '%$search%') AND visible='1' $querycat ORDER BY $sorting");
+    $result = mysqli_query($link, "SELECT * FROM products,brand WHERE brand.id = products.brand AND (products.title LIKE '%$search%' OR brand.brand LIKE '%$search%') AND visible='1' $querycat ORDER BY $sorting");
 
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);

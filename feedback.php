@@ -98,73 +98,77 @@ include("include/auth_cookie.php");
                 $error[] = "Имя должно быть не меньше 1 символа кириллицей или латиницей!";
 
                 echo '<script>
-        let mes1 = document.getElementById("feedback_nameHelpBlock");
-        let inp1 = document.getElementById("feedback_name");
-        mes1.style.color = "red";
-        mes1.hidden = false;
-        inp1.classList.remove("mb-4");
-        inp1.classList.add("mb-2");
-        </script>
-        ';
+                let mes1 = document.getElementById("feedback_nameHelpBlock");
+                let inp1 = document.getElementById("feedback_name");
+                mes1.style.color = "red";
+                mes1.hidden = false;
+                inp1.classList.remove("mb-4");
+                inp1.classList.add("mb-2");
+                </script>
+                ';
             }
 
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
                 $error[] = "Неправильно указан E-mail!";
 
                 echo '<script>
-            let mes2 = document.getElementById("feedback_emailHelpBlock");
-            let inp2 = document.getElementById("feedback_email");
-            mes2.style.color = "red";
-            mes2.hidden = false;
-            inp2.classList.remove("mb-4");
-            inp2.classList.add("mb-2");
-        </script>
-        ';
+                    let mes2 = document.getElementById("feedback_emailHelpBlock");
+                    let inp2 = document.getElementById("feedback_email");
+                    mes2.style.color = "red";
+                    mes2.hidden = false;
+                    inp2.classList.remove("mb-4");
+                    inp2.classList.add("mb-2");
+                </script>
+                ';
             }
 
             if (strlen($subject) < 1) {
                 $error[] = "Укажите тему!";
 
                 echo '<script>
-            let mes3 = document.getElementById("feedback_subjectHelpBlock");
-            let inp3 = document.getElementById("feedback_subject");
-            mes3.style.color = "red";
-            mes3.hidden = false;
-            inp3.classList.remove("mb-4");
-            inp3.classList.add("mb-2");
-        </script>
-        ';
+                    let mes3 = document.getElementById("feedback_subjectHelpBlock");
+                    let inp3 = document.getElementById("feedback_subject");
+                    mes3.style.color = "red";
+                    mes3.hidden = false;
+                    inp3.classList.remove("mb-4");
+                    inp3.classList.add("mb-2");
+                </script>
+                ';
             }
 
             if (strlen($text) < 1) {
                 $error[] = "Укажите текст сообщения!";
 
                 echo '<script>
-            let mes4 = document.getElementById("feedback_textHelpBlock");
-            let inp4 = document.getElementById("feedback_text");
-            mes4.style.color = "red";
-            mes4.hidden = false;
-            inp4.classList.remove("mb-4");
-            inp4.classList.add("mb-2");
-        </script>
-        ';
+                    let mes4 = document.getElementById("feedback_textHelpBlock");
+                    let inp4 = document.getElementById("feedback_text");
+                    mes4.style.color = "red";
+                    mes4.hidden = false;
+                    inp4.classList.remove("mb-4");
+                    inp4.classList.add("mb-2");
+                </script>
+                ';
             }
 
 
 
             if (empty($error)) {
 
-                mb_language("ru");
-                mail('zpitanie040@gmail.com', $subject, "От: " . $name . "\r\n" . $text, 'From:' . $email, 'Content-Type: text/html; charset=utf-8');
+                // mb_language("ru");
+                // mail($email, $subject, "От: " . $name . "\r\n" . $text, 'From:zpitanie040@gmail.com', 'Content-Type: text/html; charset=utf-8');
+
+                mysqli_query($link, "INSERT INTO feedback(confirmed, name, email, subject, text, datetime)
+                            values('no', '$name', '$email', '$subject', '$text', NOW())");
 
                 echo '<script>
-            let mes_success = document.getElementById("success_feedback_message");
-            mes_success.hidden = false;
+                    let mes_success = document.getElementById("success_feedback_message");
+                    mes_success.hidden = false;
 
-        </script>
-        ';
+                </script>
+                ';
             }
-        } ?>
+        } 
+        ?>
 
     </main>
 

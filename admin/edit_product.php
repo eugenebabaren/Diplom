@@ -246,15 +246,14 @@ if (isset($_POST['edit_product_form_submit'])) {
                     break;
                 case 4:
                     $old_image = mysqli_query($link, "SELECT * FROM products WHERE products_id='$id'");
-                            if (mysqli_num_rows($old_image) > 0) {
-                                $result_old_image = mysqli_fetch_array($old_image);
+                    if (mysqli_num_rows($old_image) > 0) {
+                        $result_old_image = mysqli_fetch_array($old_image);
 
-                                do {
-                                    $newfilename = $result_old_image["image"];
+                        do {
+                            $newfilename = $result_old_image["image"];
+                        } while ($result_old_image = mysqli_fetch_array($old_image));
+                    }
 
-                                } while ($result_old_image = mysqli_fetch_array($old_image));
-                            }
-                    
                     break;
                 case 6:
                     $error[] = "Отсутствует временная папка";
@@ -382,6 +381,70 @@ if (isset($_POST['edit_product_form_submit'])) {
 
         $update = mysqli_query($link, "UPDATE products SET $edit_query WHERE products_id='$id'");
     }
+
+
+
+
+    //галерея
+
+    if (empty($_POST["galleryimg"]) && empty($error)) {
+
+        if ($_FILES["galleryimg"]["name"][0]) {
+
+            for ($i = 0; $i < count($_FILES["galleryimg"]["name"]); $i++) {
+                $error_gallery = "";
+
+                if ($_FILES["galleryimg"]["name"][$i]) {
+                    $galleryimgType = $_FILES["galleryimg"]["type"][$i];
+                    $types = array("image/jpeg", "image/jpg", "image/png");
+
+                    $imgext2 = strtolower(preg_replace("#.+\.([a-z]+)$#i", "$1", $_FILES["galleryimg"]["name"][$i]));
+
+                    $uploaddir2 = "../images/";
+                    $newfilename2 = $id . rand(10, 500) . "" . rand(10, 500) . "" . rand(10, 500) . "." . $imgext2;
+                    $uploadfile2 = $uploaddir2 . $newfilename2;
+
+                    if (@move_uploaded_file($_FILES["galleryimg"]["tmp_name"][$i], $uploadfile2)) {
+                        $update2 = mysqli_query($link, "INSERT INTO uploads_images(products_id, image)
+                                                values('" . $id . "',
+                                                       '" . $newfilename2 . "')");
+                    } else {
+                        $error[] = "Ошибка загрузки файла!";
+
+                        echo '<script>
+                        document.addEventListener("DOMContentLoaded", function() {
+                            let mes62 = document.getElementById("galleryimgHelpBlock");
+                            let inp62 = document.getElementById("galleryimg");
+                            mes62.innerHTML = "Ошибка загрузки файла!";
+                            mes62.style.color = "red";
+                            mes62.hidden = false;
+                            inp62.classList.remove("mb-4");
+                            inp62.classList.add("mb-2");
+                        });
+                        </script>
+                        ';
+                    }
+                }
+            }
+        }
+
+        unset($_POST["galleryimg"]);
+    } else {
+        $error[] = "Вы не выбрали файлы";
+
+        echo '<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            let mes63 = document.getElementById("galleryimgHelpBlock");
+            let inp63 = document.getElementById("galleryimg");
+            mes63.innerHTML = "Вы не выбрали файлы";
+            mes63.style.color = "red";
+            mes63.hidden = false;
+            inp63.classList.remove("mb-4");
+            inp63.classList.add("mb-2");
+        });
+        </script>
+        ';
+    }
 }
 
 
@@ -474,17 +537,25 @@ if (isset($_POST['edit_product_form_submit'])) {
 
                                 <select name="category" id="category" class="form-control mb-4 ml-3 w-50">
 
-                                <option value="' . $row["product_type"] . '">' . $row["product_type"] . '</option>';
+                                ';
 
-                            $category = mysqli_query($link, "SELECT * FROM category GROUP BY category");
+                            $first_category = mysqli_query($link, "SELECT * FROM category WHERE category.id = '{$row["product_type"]}'");
+                            $result_first_category = mysqli_fetch_array($first_category);
+                            echo '
+                                <option value="' . $result_first_category["id"] . '">' . $result_first_category["category"] . '</option>
+                                ';
+
+
+                            $category = mysqli_query($link, "SELECT * FROM category");
+
                             if (mysqli_num_rows($category) > 0) {
                                 $result_category = mysqli_fetch_array($category);
 
                                 do {
 
-                                    if ($result_category["category"] != $row["product_type"]) {
+                                    if ($result_category["id"] != $result_first_category["id"]) {
                                         echo '
-                                        <option value="' . $result_category["category"] . '">' . $result_category["category"] . '</option>
+                                        <option value="' . $result_category["id"] . '">' . $result_category["category"] . '</option>
                                         ';
                                     }
                                 } while ($result_category = mysqli_fetch_array($category));
@@ -502,18 +573,26 @@ if (isset($_POST['edit_product_form_submit'])) {
                             <div class="row">
                                 <select name="brand" id="brand" class="form-control mb-4 ml-3 w-50">
                                 
-                                <option value="' . $row["brand"] . '">' . $row["brand"] . '</option>
                                 ';
 
-                            $brand = mysqli_query($link, "SELECT * FROM brand GROUP BY brand");
+                            $first_brand = mysqli_query($link, "SELECT * FROM brand WHERE brand.id = '{$row["brand"]}'");
+                            $result_first_brand = mysqli_fetch_array($first_brand);
+                            echo '
+                                    <option value="' . $result_first_brand["id"] . '">' . $result_first_brand["brand"] . '</option>
+                                    ';
+
+
+
+                            $brand = mysqli_query($link, "SELECT * FROM brand");
+
                             if (mysqli_num_rows($brand) > 0) {
                                 $result_brand = mysqli_fetch_array($brand);
 
                                 do {
 
-                                    if ($result_brand["brand"] != $row["brand"]) {
+                                    if ($result_brand["id"] != $result_first_brand["id"]) {
                                         echo '
-                                        <option value="' . $result_brand["brand"] . '">' . $result_brand["brand"] . '</option>
+                                        <option value="' . $result_brand["id"] . '">' . $result_brand["brand"] . '</option>
                                         ';
                                     }
                                 } while ($result_brand = mysqli_fetch_array($brand));
@@ -527,7 +606,7 @@ if (isset($_POST['edit_product_form_submit'])) {
                             </div>
 
 
-                            <label class="mb-1">Изображение</label>
+                            <label class="mb-1">Основное изображение</label>
                             
                             <div class="row">
                                 <span class="output" id="output"><img id="outIMG" src="../images/' . $row["image"] . '" class="w-25 img-fluid m-3"></span>
@@ -541,6 +620,51 @@ if (isset($_POST['edit_product_form_submit'])) {
                             <small id="imageHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
+
+                            <label class="mb-1">Галерея изображений</label>
+                            <div id="objects">
+
+                                <small id="galleryimgHelpBlock" class="form-text mb-4" hidden>
+                                    At least 8 characters and 1 digit
+                                </small>
+                            </div>
+                            <div class="row ml-0 pb-5 pt-2">
+                                <a id="add-input" class="text-success">
+                                    Добавить
+                                </a>
+                            </div>
+                            
+                            
+                            
+                            
+                            <ul class="list-inline row ml-1">';
+
+                            $query_img = mysqli_query($link, "SELECT * FROM uploads_images WHERE products_id='$id'");
+
+                            if (mysqli_num_rows($query_img) > 0) {
+                                $result_img = mysqli_fetch_array($query_img);
+
+                                do {
+
+                                    echo '
+                                        
+                                            <li class="col-2 list-inline-item pr-0 pl-0 mr-0 ml-0" id="del' . $result_img["id"] . '">
+
+                                            <a class="del-img text-danger" img_id="' . $result_img["id"] . '">
+                                                <button type="button" class="close ml-auto mr-3" aria-label="Close">
+                                                <span aria-hidden="true">X</span>
+                                            </a>
+                                            <img src="../images/' . $result_img["image"] . '" title="' . $result_img["image"] . 's" class="w-100">
+      
+                                            </li>
+                                        
+                                        ';
+                                } while ($result_img = mysqli_fetch_array($query_img));
+                            }
+
+                            echo '
+                            </ul>
+
 
 
                             <label data-error="wrong" data-success="right" for="description">Описание</label>
@@ -575,16 +699,14 @@ if (isset($_POST['edit_product_form_submit'])) {
                             <select name="availability" id="availability" class="form-control mb-4 w-75">';
 
                             if ($row["availability"] == "1") {
-                                echo '
-                                    <option value="1">В наличии</option>
-                                    ';
+                                $selected1 = "selected";
                             } else {
-                                echo '
-                                    <option value="0">Временно нет</option>
-                                    ';
+                                $selected2 = "selected";
                             }
 
                             echo '
+                            <option ' . $selected1 . ' value="1">В наличии</option>
+                            <option ' . $selected2 . ' value="0">Временно нет</option>
                             </select>
 
 
@@ -593,16 +715,14 @@ if (isset($_POST['edit_product_form_submit'])) {
                             ';
 
                             if ($row["visible"] == "1") {
-                                echo '
-                                    <option value="1">Да</option>
-                                    ';
+                                $selected3 = "selected";
                             } else {
-                                echo '
-                                    <option value="0">Нет</option>
-                                    ';
+                                $selected4 = "selected";
                             }
 
                             echo '
+                            <option ' . $selected3 . ' value="1">Да</option>
+                            <option ' . $selected4 . ' value="0">Нет</option>
 
                             </select>
 

@@ -18,57 +18,7 @@ switch ($action) {
 }
 
 
-//подтверждение заказа
-if (isset($_POST['submit_order'])) {
 
-    if ($_SESSION['auth'] == 'yes_auth') {
-        mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
-        values(NOW(),
-               'no',
-               '" . $_SESSION["order_delivery"] . "',
-               '" . $_SESSION["auth_surname"] . " ' '" . $_SESSION["auth_name"] . " ' '" . $_SESSION["auth_patronymic"] . "',
-               '" . $_SESSION["auth_address"] . "',
-               '" . $_SESSION["auth_phone"] . "',
-               '" . $_SESSION["order_note"] . "',
-               '" . $_SESSION["auth_email"] . "'
-               )");
-    } else {
-        mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
-        values(NOW(),
-               'no',
-               '" . $_SESSION["order_delivery"] . "',
-               '" . $_SESSION["order_fio"] . "',
-               '" . $_SESSION["order_address"] . "',
-               '" . $_SESSION["order_phone"] . "',
-               '" . $_SESSION["order_note"] . "',
-               '" . $_SESSION["order_email"] . "'
-               )");
-    }
-
-
-    $_SESSION["order_id"] = mysqli_insert_id($link);
-
-    $result = mysqli_query($link, "SELECT * FROM cart WHERE cart_ip = '{$_SERVER['REMOTE_ADDR']}'");
-    if (mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_array($result);
-
-        do {
-            mysqli_query($link, "INSERT INTO buy_products(buy_id_order,buy_id_product,buy_count_product)
-            values('" . $_SESSION["order_id"] . "',
-                   '" . $row["cart_id_products"] . "',
-                   '" . $row["cart_count"] . "'
-                   )");
-        } while ($row = mysqli_fetch_array($result));
-    }
-
-    echo '
-                <script>
-
-                    localStorage.success_order_mes = 1;
-
-                </script>
-                ';
-}
 
 
 if (isset($_POST['submitdata'])) {
@@ -555,7 +505,7 @@ if (isset($_POST['submitdata'])) {
 
 
 
-            //3 СТАДИЯ
+                //3 СТАДИЯ
             case 'completion':
 
                 //сообщение об успешном заказе
@@ -578,9 +528,10 @@ if (isset($_POST['submitdata'])) {
 
                     function sayHi() {
                         delete localStorage.success_order_mes;
+                        location.replace("index.php");
                     }
                     
-                    setTimeout(sayHi, 3000);
+                    setTimeout(sayHi, 5000);
 
                 </script>
                 ';
@@ -592,15 +543,17 @@ if (isset($_POST['submitdata'])) {
         <div class="card mb-3 wow fadeIn">
             <div class="row m-3 mt-4">
                 
-                <a href="cart.php?action=oneclick">
+                <a id="disable_cart" href="cart.php?action=oneclick">
                     <h5 class="mr-4 ml-2 mt-2 mb-3 text-dark">1. Корзина товаров</h5>
                 </a>
         
                 <h5 class="mr-4 mt-2">—</h5>
-                <a href="cart.php?action=confirm">
+
+                <a id="disable_contact" href="cart.php?action=confirm">
                     <h5 class="mr-4 mt-2 text-dark">2. Контактная информация</h5>
                 </a>
                 <h5 class="mr-4 mt-2">—</h5>
+
                 <h5 class="font-weight-bold mt-2 text-success">3. Подтверждение</h5>
             </div>
         </div>
@@ -709,7 +662,8 @@ if (isset($_POST['submitdata'])) {
                         <h5><span class="font-weight-bold">Итого: </span>' . $total_price_cart . ' руб.</h5>
                     </li>
                 </ul>
-                <button type="submit" id="submit_order" name="submit_order" class="btn btn-success btn-block waves-effect waves-light m-4 w-25">Подтвердить заказ</button>
+                <button type="submit" id="submit_order" name="submit_order" class="btn btn-success btn-block waves-effect waves-light m-4 w-25">Подтвердить заказ
+                </button>
                 </form>
             </div>
         </div>';
@@ -906,6 +860,82 @@ if (isset($_POST['submitdata'])) {
             
         ';
                 break;
+        }
+
+
+
+
+
+
+
+        //подтверждение заказа
+        if (isset($_POST['submit_order'])) {
+
+
+            echo '<script>
+            document.addEventListener("DOMContentLoaded", function() {
+                
+                
+                        $("#disable_cart").removeAttr("href");
+                        $("#disable_contact").removeAttr("href");
+                  
+            });
+            </script>
+            ';
+
+            if ($_SESSION['auth'] == 'yes_auth') {
+                mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
+        values(NOW(),
+               'no',
+               '" . $_SESSION["order_delivery"] . "',
+               '" . $_SESSION["auth_surname"] . " ' '" . $_SESSION["auth_name"] . " ' '" . $_SESSION["auth_patronymic"] . "',
+               '" . $_SESSION["auth_address"] . "',
+               '" . $_SESSION["auth_phone"] . "',
+               '" . $_SESSION["order_note"] . "',
+               '" . $_SESSION["auth_email"] . "'
+               )");
+            } else {
+                mysqli_query($link, "INSERT INTO orders(order_datetime,order_confirmed,order_delivery,order_FIO,order_address,order_phone,order_note,order_email)
+        values(NOW(),
+               'no',
+               '" . $_SESSION["order_delivery"] . "',
+               '" . $_SESSION["order_fio"] . "',
+               '" . $_SESSION["order_address"] . "',
+               '" . $_SESSION["order_phone"] . "',
+               '" . $_SESSION["order_note"] . "',
+               '" . $_SESSION["order_email"] . "'
+               )");
+            }
+
+
+
+            //подтв. заказа
+            $_SESSION["order_id"] = mysqli_insert_id($link);
+
+            $result = mysqli_query($link, "SELECT * FROM cart WHERE cart_ip = '{$_SERVER['REMOTE_ADDR']}'");
+            if (mysqli_num_rows($result) > 0) {
+                $row = mysqli_fetch_array($result);
+
+                do {
+                    mysqli_query($link, "INSERT INTO buy_products(buy_id_order,buy_id_product,buy_count_product)
+            values('" . $_SESSION["order_id"] . "',
+                   '" . $row["cart_id_products"] . "',
+                   '" . $row["cart_count"] . "'
+                   )");
+                } while ($row = mysqli_fetch_array($result));
+            }
+
+            echo '
+                <script>
+
+                    localStorage.success_order_mes = 1;
+
+                </script>
+                ';
+
+            mysqli_query($link, "TRUNCATE TABLE cart");
+
+            
         }
         ?>
 

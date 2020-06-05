@@ -1,66 +1,67 @@
 <!-- Footer -->
-<footer class="page-footer font-small green pt-4 pb-0 mb-0">
+<footer class="page-footer font-small green pt-5 pb-0 mb-0">
 
   <!-- Footer Links -->
-  <div class="container-fluid text-center text-md-center">
+  <div class="container-fluid">
 
     <!-- Grid row -->
     <div class="row">
 
       <!-- Grid column -->
-      <div class="col-md-6 mt-md-0 mt-3">
-
-        <!-- Content -->
-        <h5 class="text-uppercase">Footer Content</h5>
-        <p>Here you can use rows and columns to organize your footer content.</p>
-
-      </div>
-      <!-- Grid column -->
-
-      <hr class="clearfix w-100 d-md-none pb-3">
-
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
-
-        <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+      <div class="col ml-5 pl-5">
 
         <ul class="list-unstyled">
           <li>
-            <a href="#!">Link 1</a>
+            <a href="index.php" class="nav-link waves-effect">Каталог</a>
           </li>
           <li>
-            <a href="#!">Link 2</a>
+            <a href="about_us.php" class="nav-link waves-effect">О нас</a>
           </li>
           <li>
-            <a href="#!">Link 3</a>
+            <a href="payment_delivery.php" class="nav-link waves-effect">Оплата и доставка</a>
           </li>
           <li>
-            <a href="#!">Link 4</a>
+            <a href="contacts.php" class="nav-link waves-effect">Контакты</a>
+          </li>
+          <li>
+            <a href="news.php" class="nav-link waves-effect">Новости</a>
+          </li>
+          <li>
+            <a href="faq.php" class="nav-link waves-effect">Вопросы и ответы</a>
+          </li>
+          <li>
+            <a href="feedback.php" class="nav-link waves-effect">Обратная связь</a>
           </li>
         </ul>
 
       </div>
       <!-- Grid column -->
 
-      <!-- Grid column -->
-      <div class="col-md-3 mb-md-0 mb-3">
 
-        <!-- Links -->
-        <h5 class="text-uppercase">Links</h5>
+      <div class="col mt-2">
 
         <ul class="list-unstyled">
+          <li class="font-weight-bold mb-1">Время работы интернет-магазина:</li>
+          <li class="mb-4">Пн.–сб. с 9:00 до 21:00</li>
+
+          <li class="font-weight-bold mb-1">Телефоны:</li>
+
+          <li class="mb-2">+375 (29) 234-54-34</li>
+          <li class="mb-4">+375 (29) 190-23-99</li>
+
+          <li class="font-weight-bold mb-1">E-mail:</li>
+          <li class="mb-4"><a href="mailto:zpitanie040@gmail.com">zpitanie040@gmail.com</a></li>
+        </ul>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col mt-2">
+
+        <ul class="list-unstyled ml-5">
           <li>
-            <button ID = "toTop" > Наверх </button>
-          </li>
-          <li>
-            <a href="#!">Link 2</a>
-          </li>
-          <li>
-            <a href="#!">Link 3</a>
-          </li>
-          <li>
-            <a href="#!">Link 4</a>
+            <button id="toTop" class="btn btn-white ml-3"><i class="far fa-arrow-alt-circle-up"> Вверх</i></button>
           </li>
         </ul>
 

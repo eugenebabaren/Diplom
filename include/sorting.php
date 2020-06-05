@@ -28,12 +28,12 @@ switch ($sorting) {
     break;
 
   case 'from-a-to-z':
-    $sorting = 'brand ASC';
+    $sorting = 'brand.brand ASC';
     $sort_name = 'От А до Я';
     break;
 
   case 'from-z-to-a':
-    $sorting = 'brand DESC';
+    $sorting = 'brand.brand DESC';
     $sort_name = 'От Я до А';
     break;
 

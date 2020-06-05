@@ -33,7 +33,7 @@
 
                   <?php
 
-                  $result = mysqli_query($link, "SELECT * FROM products GROUP BY brand");
+                  $result = mysqli_query($link, "SELECT * FROM brand");
 
                   if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result);
@@ -45,7 +45,7 @@
                       $checked_brand = "";
 
                       if ($_GET["brand"]) {
-                        if (in_array($row["brand"], $_GET["brand"])) {
+                        if (in_array($row["id"], $_GET["brand"])) {
                           $checked_brand = "checked";
                         }
                       }
@@ -54,7 +54,7 @@
                   <li>
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
-                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["brand"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
+                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
                         <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . $row["brand"] . '</label>
                       </div>
                     </a>
@@ -71,7 +71,7 @@
                   <h3 class="ml-4 mt-2 pb-2 font-weight-bold">Категория</h3>
                   <?php
 
-                  $result = mysqli_query($link, "SELECT * FROM category GROUP BY category");
+                  $result = mysqli_query($link, "SELECT * FROM category");
 
                   if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result);
@@ -82,7 +82,7 @@
                       $checked_type = "";
 
                       if ($_GET["type"]) {
-                        if (in_array($row["category"], $_GET["type"])) {
+                        if (in_array($row["id"], $_GET["type"])) {
                           $checked_type = "checked";
                         }
                       }
@@ -91,7 +91,7 @@
                   <li>
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
-                        <input ' . $checked_type . ' type="checkbox" name="type[]" value="' . $row["category"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id . '">
+                        <input ' . $checked_type . ' type="checkbox" name="type[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id . '">
                         <label class="custom-control-label" for="checkbox' .  $checkbox_id . '">' . $row["category"] . '</label>
                       </div>
                     </a>

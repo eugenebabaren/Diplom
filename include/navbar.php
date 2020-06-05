@@ -17,7 +17,7 @@ include("include/auth_cookie.php");
                     <a href="about_us.php" class="nav-link waves-effect">О НАС</a>
                 </li>
                 <li class="nav-item mr-2">
-                    <a href="#" class="nav-link waves-effect">ОПЛАТА И ДОСТАВКА</a>
+                    <a href="payment_delivery.php" class="nav-link waves-effect">ОПЛАТА И ДОСТАВКА</a>
                 </li>
                 <li class="nav-item mr-2">
                     <a href="contacts.php" class="nav-link waves-effect">КОНТАКТЫ</a>
@@ -34,6 +34,17 @@ include("include/auth_cookie.php");
             </ul>
             <ul>
                 <ul class="navbar-nav nav-flex-icons mt-3">
+                    <?php
+                    if ($_SESSION['auth'] == 'yes_auth') {
+                        echo '
+                        <li id="my_orders" class="nav-item mr-1">
+                            <a href="my_orders.php" class="nav-link border border-light rounded waves-effect">
+                                <b>МОИ ЗАКАЗЫ</b>
+                            </a>
+                        </li>
+                        ';
+                    }
+                    ?>
                     <li class="nav-item mr-1">
                         <a href="cart.php?action=oneclick" class="nav-link border border-light rounded waves-effect">
                             <i id="fa-shopping-basket" class="fas fa-shopping-basket badge-wrapper">

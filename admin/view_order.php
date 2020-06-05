@@ -163,7 +163,13 @@ if(isset($action)) {
                                 <p class="mb-2"><span class="font-weight-bold">Адрес: </span>' . $row_reviews["order_address"] . '</p> 
                                 <p class="mb-2"><span class="font-weight-bold">E-mail: </span>' . $row_reviews["order_email"] . '</p> 
                                 <p class="mb-2"><span class="font-weight-bold">Телефон: </span>' . $row_reviews["order_phone"] . '</p> 
-                                <p class="mb-2"><span class="font-weight-bold">Примечание: </span>' . $row_reviews["order_note"] . '</p> 
+                                '; 
+
+                            if($row_reviews["order_note"] != "") {
+                                echo '<p class="mb-2"><span class="font-weight-bold">Примечание: </span>' . $row_reviews["order_note"] . '</p>';
+                            }
+
+                            echo ' 
                                 <p class="mb-2"><span class="font-weight-bold">Способ доставки: </span>' . $row_reviews["order_delivery"] . '</p>
                                 <p class="mb-0"><span class="font-weight-bold">Итоговая цена: </span>' . $price . ' руб.</p>                    
                             </div>

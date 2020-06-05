@@ -20,7 +20,7 @@ if (isset($_POST['sign_submit'])) {
 
                 localStorage.test = 2;
                 location.replace("index.php");
-                
+
                 let sign_in_icon_old = document.getElementById("sign_in_navbar_title_old");
                 sign_in_icon_old.hidden = true;
 
@@ -31,9 +31,13 @@ if (isset($_POST['sign_submit'])) {
                 let profile_icon = document.getElementById("profile_icon");
                 profile_icon.hidden = false;
 
+                //document.getElementById("my_orders").hidden = false;
+
                 localStorage.reg_remove = 2;
                 let reg_remove = document.getElementById("reg_remove");
                 reg_remove.remove();
+                
+                
 
             });
         </script>

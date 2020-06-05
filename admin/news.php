@@ -110,22 +110,34 @@ if (isset($action)) {
 
                             echo '
                                     <div class="row pt-4">
-                                
 
                                         <div class="col-lg-12 text-md-left pb-4 pl-4">
                                             <h4 class="ml-xl-0 ml-5 font-weight-bold">' . $row_reviews["title"] . '</h4>
 
                                             <p class="ml-xl-0 ml-5">' . $row_reviews["date"] . '</p>
 
-                                            <h6 class="ml-xl-0 ml-5">' . $row_reviews["text"] . '</h6>
+                                            <p class="col-lg-4 ml-xl-0 pl-0"><img class="card-img-top" src="../images/', $row_reviews["image"], '" alt="Card image cap"></p>
+
+                                            <h6 class="ml-xl-0 ml-5">' . mb_strimwidth($row_reviews["text"], 0, 300, "...", "UTF-8") . '</h6>
                                             
                                         </div>
                                         
                                     </div>
 
-                                    <button class="delete btn btn-danger mb-2 ml-auto" rel="news.php?id=' . $row_reviews["id"] . '&action=delete">
-                                        Удалить
-                                    </button>
+                                    <div class="row ml-2 pt-4 mr-1">
+                                        <a href="edit_news.php?id=' . $row_reviews["id"] . '" class="ml-auto">
+                                            <button class="btn btn-success mb-2">
+                                                Изменить
+                                            </button>
+                                        </a>
+
+                                        <a class="">
+                                            <button class="delete btn btn-danger ml-auto" rel="news.php?id=' . $row_reviews["id"] . '&action=delete">
+                                                Удалить
+                                            </button>
+                                        </a>
+                                    </div>
+
                                     <hr class="mr-1">
 
                             ';

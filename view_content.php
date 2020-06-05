@@ -5,9 +5,12 @@ include("functions/functions.php");
 session_start();
 include("include/auth_cookie.php");
 
-include("include/sorting.php");
-
 $id = clearString($_GET["id"]);
+
+
+
+include("include/add_reviews.php");
+
 ?>
 
 
@@ -33,6 +36,7 @@ $id = clearString($_GET["id"]);
   <link rel="stylesheet" href="css/mdb.min.css">
   <!-- Your custom styles (optional) -->
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
   <!-- <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script> -->
 </head>
 
@@ -63,7 +67,26 @@ $id = clearString($_GET["id"]);
             echo '
           <div class="row m-4">
             <div class="col-lg-6 mt-2 text-center">
-              <img src="images/' . $row["image"] . '" alt="First slide" class="img-fluid">
+
+            <a data-fancybox="gallery" href="images/' . $row["image"] . '"><img src="images/' . $row["image"] . '" alt="First slide" class="img-fluid"></a>
+              ';
+
+
+            $result23 = mysqli_query($link, "SELECT * FROM uploads_images WHERE products_id='$id'");
+            if (mysqli_num_rows($result23) > 0) {
+              $row23 = mysqli_fetch_array($result23);
+
+              do {
+
+                echo '
+                  <a data-fancybox="gallery" href="images/' . $row23["image"] . '"><img src="images/' . $row23["image"] . '" alt="First slide" class="img-fluid w-25"></a>
+                  
+                  ';
+              } while ($row23 = mysqli_fetch_array($result23));
+            }
+
+
+            echo '
             </div>
     
             <div class="col-lg-6 text-center text-md-left">
@@ -228,6 +251,9 @@ $id = clearString($_GET["id"]);
                     <div class="md-form amber-textarea active-amber-textarea mt-4 mb-4">
                       <textarea class="md-textarea form-control" rows="3" id="review_modal_comment" name="review_modal_comment"></textarea>
                       <label for="review_modal_comment">Комментарий (если необходимо)</label>
+                      <small id="commentHelpBlock" class="form-text" hidden>
+                        Укажите комментарий!
+                      </small>
                     </div>
 
                   </div>
@@ -243,9 +269,6 @@ $id = clearString($_GET["id"]);
 
         </div>
 
-        <?php
-        include("include/add_reviews.php");
-        ?>
 
       </div>
     </section>
@@ -254,7 +277,7 @@ $id = clearString($_GET["id"]);
 
   </main>
 
-  
+
   <?php
   include("include/footer.php");
   ?>
@@ -270,6 +293,7 @@ $id = clearString($_GET["id"]);
   <script type="text/javascript" src="js/mdb.min.js"></script>
   <!-- Your custom scripts (optional) -->
   <script src="js/jquery.maskedinput.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
   <script type="text/javascript" src="js/script.js"></script>
 
 </body>

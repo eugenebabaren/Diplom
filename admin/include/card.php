@@ -5,7 +5,7 @@
 
     if (!empty($cat) && !empty($type)) {
 
-      $querycat = "AND brand='$cat' AND product_type='$type'";
+      $querycat = "AND products.brand='$cat' AND product_type='$type'";
     } else {
       if (!empty($type)) {
         $querycat = "AND product_type='$type'";
@@ -16,7 +16,7 @@
 
 
 
-    $result = mysqli_query($link, "SELECT * FROM products ORDER BY products_id DESC");
+    $result = mysqli_query($link, "SELECT * FROM products,brand WHERE brand.id = products.brand ORDER BY products_id DESC");
 
     if (mysqli_num_rows($result) > 0) {
       $row = mysqli_fetch_array($result);
@@ -25,9 +25,18 @@
 
 
         echo '
-      <div class="col mb-4 pr-2">
+      <div class="col mb-4 pr-auto">
 
       <div class="card">
+        <div class="row mb-3 mt-2">
+            <a href="edit_product.php?id=' . $row["products_id"] . '" class="ml-auto pb-0 mt-2">
+              <button type="button" class="btn btn-block btn-success"><i class="fas fa-pen"></i></button>
+            </a>
+
+            <a rel="tovar.php?' . $url . 'id=' . $row["products_id"] . '&action=delete" class="delete mr-auto pt-0 mt-2">
+              <button type="button" class="btn btn-block btn-danger"><i class="far fa-trash-alt"></i></button>
+            </a>
+        </div>
 
         <div class="view overlay">
           <img id="card-image" class="card-img-top" src="../images/', $row["image"], '" alt="Card image cap">
@@ -67,15 +76,7 @@
           </p>
           <h4 class="card-price">', $row["price"], ' руб.</h4>
 
-          <div class="modal-footer border-0 d-flex justify-content-between pl-0 pr-0">
-            <a href="edit_product.php?id=' . $row["products_id"] . '" class="btn-block ml-auto mr-auto pb-0 mb-0">
-              <button type="button" class="btn btn-block btn-success">Изменить</button>
-            </a>
-
-            <a rel="tovar.php?' . $url . 'id=' . $row["products_id"] . '&action=delete" class="delete btn-block ml-auto mr-auto pt-0 mt-2">
-              <button type="button" class="btn btn-block btn-danger">Удалить</button>
-            </a>
-          </div>
+          
 
         </div>
 

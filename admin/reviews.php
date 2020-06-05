@@ -35,7 +35,7 @@ switch ($sort) {
 
 
 $action = $_GET["action"];
-if(isset($action)) {
+if (isset($action)) {
     switch ($action) {
         case 'accept':
             $update = mysqli_query($link, "UPDATE reviews SET moderat='1' WHERE reviews_id='$id'");
@@ -142,21 +142,26 @@ if(isset($action)) {
 
                         do {
 
+                            $ml_auto = "";
+                            $ml_null = "";
+
                             if ($row_reviews["moderat"] == '0') {
                                 $btn_accept = '
                                 <a href="reviews.php?id=' . $row_reviews["reviews_id"] . '&action=accept" class="ml-auto">
-                                    <button class="btn btn-success mt-4 mb-2 ml-auto">
+                                    <button class="btn btn-success mt-4 mb-2">
                                         Принять
                                     </button>
                                 </a>';
+                                $ml_null = "ml-0";
                             } else {
                                 $btn_accept = '';
+                                $ml_auto = "ml-auto";
                             }
 
                             echo '
                                     <div class="row ml-2 pt-4">
-                                        <div class="col-lg-3 text-left">
-                                            <span class="">' . $row_reviews["title"] . '</strong></span>
+                                        <div class="col-lg-3 text-center">
+                                            <span>' . $row_reviews["title"] . '</span>
                                             <img id="" src="../images/' . $row_reviews["image"] . '" class="w-100 img-fluid pr-3">
                                             
                                         </div>
@@ -174,11 +179,16 @@ if(isset($action)) {
                                         
                                     </div>
 
-                                    ' . $btn_accept . '
+                                    <div class="row ml-2 pt-4">
+                                        ' . $btn_accept . '
 
-                                    <button class="delete btn btn-danger mb-2 ml-auto" rel="reviews.php?id=' . $row_reviews["reviews_id"] . '&action=delete">
-                                        Удалить
-                                    </button>
+                                        <a class="' . $ml_auto . ' ' . $ml_null . '">
+
+                                            <button class="delete btn btn-danger mt-4 mb-2 mr-3" rel="reviews.php?id=' . $row_reviews["reviews_id"] . '&action=delete">
+                                                Удалить
+                                            </button>
+                                        </a>
+                                    </div>
                                     <hr class="mr-1">
 
                             ';
