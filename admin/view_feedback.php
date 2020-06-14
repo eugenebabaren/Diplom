@@ -131,7 +131,7 @@ if (isset($_POST['feedback_submit'])) {
                                         <div class="row ml-1 pt-2">
                                             <div class="col-lg-6 text-left">
                                                 <p>' . $row_reviews["datetime"] . '</p>
-                                                <p class="ml-xl-0 font-weight-bold">Сообщение №' . $row_reviews["id"] . ' -
+                                                <p class="ml-xl-0 font-weight-bold">
                                                 ';
                                                 if ($row_reviews["confirmed"] == 'yes') {
                                                     echo '<span class="text-success">Отвечено</span>';
@@ -147,7 +147,7 @@ if (isset($_POST['feedback_submit'])) {
                                             </div>
                                             <a rel="view_feedback.php?id=' . $row_reviews["id"] . '&action=delete" class="delete mr-3 h-75 ml-auto">
                                                 <button class="btn btn-danger">
-                                                    Удалить заказ
+                                                    Удалить сообщение
                                                 </button> 
                                             </a>
                                         </div>';

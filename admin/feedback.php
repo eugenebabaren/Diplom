@@ -129,14 +129,14 @@ switch ($sort) {
                     if (mysqli_num_rows($query_reviews) > 0) {
                         $row_reviews = mysqli_fetch_array($query_reviews);
 
-
+                        $count_mes = 0;
                         do {
 
                             echo '
                                     <div class="row ml-1 pt-2">
                                         <div class="col-lg-6 text-left">
                                             <p>' . $row_reviews["datetime"] . '</p>
-                                            <p class="ml-xl-0 font-weight-bold">Сообщение №' . $row_reviews["id"] . ' -
+                                            <p class="ml-xl-0 font-weight-bold">
                                             ';
                                             if($row_reviews["confirmed"] == 'yes') {
                                                 echo '<span class="text-success">Отвечено</span>';

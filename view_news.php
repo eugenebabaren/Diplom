@@ -74,7 +74,7 @@ $id = $_GET["id"];
     
                 <p class="ml-xl-0 ml-4"><strong>' . $row["date"] . '</strong></p>
 
-                <p class="ml-xl-0 ml-4"><a data-fancybox="gallery" href="images/' . $row["image"] . '"><img class="card-img-top" src="images/', $row["image"], '" alt="Card image cap"></a></p>
+                <p class="ml-xl-0 ml-4"><a data-fancybox="gallery" href="images/' . $row["image"] . '"><img class="img-fluid" src="images/', $row["image"], '" alt="Card image cap"></a></p>
 
                 <p class="ml-xl-0 ml-4"><strong>' . $row["text"] . '</strong></p>
 

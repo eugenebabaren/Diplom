@@ -85,16 +85,14 @@ main {
 
 
 
+
+
 #btn_filtration {
     min-width: 174.98px;
     min-height: 45.88px;
     background-color: green;
 }
 
-#card-img img {
-    width: 100px;
-    height: 100px;
-}
 
 #btn_all_cat {
     color: white;
@@ -103,6 +101,8 @@ main {
 #message-auth {
     color: red;
 }
+
+
 
 
 
@@ -133,17 +133,36 @@ main {
     }
 }
 
-/* @media(min-width: 988px) and (max-width: 1200px) {
-    body {
-        font-size: 0.95vw;
+@media(max-width: 992px) {
+    .height-sidebar {
+        display: none;
+    }
+
+    .filt-btn,
+    .sort-btn {
+        min-width: 29vw;
     }
 }
 
-@media(max-width: 1357px) and (min-width: 1200px) {
-    body {
-        font-size: 0.9vw;
+@media(min-width: 875px) {
+    .search-css {
+        margin-left: auto;
     }
-} */
+}
+@media(max-width: 875px) {
+    .search-css {
+        margin-top: 1vw;
+        margin-left: 1vw;
+    }
+}
+
+@media(min-width: 768px) {
+    #card-image {
+        max-width: min-content;
+        height: auto;
+        
+    }
+}
 
 @media(max-width: 1226px) and (min-width: 988px) {
     body {

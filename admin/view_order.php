@@ -16,7 +16,7 @@ if ($_SESSION['auth_admin'] == 'yes_auth') {
 $id = clearString($_GET["id"]);
 $action = $_GET["action"];
 
-if(isset($action)) {
+if (isset($action)) {
     switch ($action) {
         case 'accept':
             $update = mysqli_query($link, "UPDATE orders SET order_confirmed='yes' WHERE order_id='$id'");
@@ -75,110 +75,122 @@ if(isset($action)) {
         ?>
 
         <div class="finder ml-3 mr-2 mb-0 justify-content-between">
-            
+
 
             <section class="col mb-3 p-0">
                 <div class="card wow fadeIn d-flex m-0 p-4">
 
 
                     <?php
-                    
+
                     $query_reviews = mysqli_query($link, "SELECT * FROM orders WHERE order_id = '$id'");
 
-                        $row_reviews = mysqli_fetch_array($query_reviews);
+                    $row_reviews = mysqli_fetch_array($query_reviews);
 
-                        do {
+                    do {
 
-                            echo '
+                        echo '
                                     <div class="row ml-1 pt-2">
                                         <div class="col-lg-6 text-left">
                                             <p>' . $row_reviews["order_datetime"] . '</p>
-                                            <p class="ml-xl-0 font-weight-bold">Заказ №' . $row_reviews["order_id"] . ' - 
+                                            <p class="ml-xl-0 font-weight-bold">
                                             ';
-                                            if($row_reviews["order_confirmed"] == 'yes') {
-                                                echo '<span class="text-success">Обработан</span>';
+                        if ($row_reviews["order_confirmed"] == 'yes') {
+                            echo '<span class="text-success">Обработан</span>';
 
-                                                $ml_auto = ' ml-auto';
-                                            }
-                                            else {
-                                                echo '<span class="text-danger">Не обработан</span>';
+                            $ml_auto = ' ml-auto';
+                        } else {
+                            echo '<span class="text-danger">Не обработан</span>';
 
-                                                $btn_confirm = '
+                            $btn_confirm = '
                                                 <a href="view_order.php?id=' . $row_reviews["order_id"] . '&action=accept" class="ml-auto h-75">
                                                     <button class="btn btn-success">
                                                         Подтвердить заказ
                                                     </button> 
                                                 </a> ';
-
-                                                
-                                            }
-                                            echo '
+                        }
+                        echo '
                                             </p>
                                             
                                         </div>
-                                        '.$btn_confirm.'
-                                        <a rel="view_order.php?id=' . $row_reviews["order_id"] . '&action=delete" class="delete mr-3 h-75 '.$ml_auto.'">
+                                        ' . $btn_confirm . '
+                                        <a rel="view_order.php?id=' . $row_reviews["order_id"] . '&action=delete" class="delete mr-3 h-75 ' . $ml_auto . '">
                                             <button class="btn btn-danger">
                                                 Удалить заказ
                                             </button> 
                                         </a>
 
                             ';
-                        } while ($row_reviews = mysqli_fetch_array($query_reviews));
-                    
+                    } while ($row_reviews = mysqli_fetch_array($query_reviews));
+
 
 
 
                     $query_product = mysqli_query($link, "SELECT * FROM buy_products, products WHERE buy_products.buy_id_order = '$id' AND products.products_id = buy_products.buy_id_product");
 
-                        $row_result = mysqli_fetch_array($query_product);
+                    $row_result = mysqli_fetch_array($query_product);
 
-                        do {
 
-                            
-                            $price = $price + $row_result["price"] * $row_result["buy_count_product"];
+                    do {
 
-                            
 
+                        $price = $price + $row_result["price"] * $row_result["buy_count_product"];
+
+
+
+                        if (!empty($row_result["title"])) {
                             echo '
                                     
+                                <div class="col-lg-12 text-left">  
+                                    <hr class="mr-2">     
+                                    <p class="mb-2">Наименование товара: ' . $row_result["title"] . '</p>
+                                    <p class="mb-2">Цена: ' . $row_result["price"] . ' руб.</p>
+                                    <p class="mb-0">Количество: ' . $row_result["buy_count_product"] . '</p>                     
+                                </div>
+                            
+                            
+                            ';
+                        } else {
+                            echo '
+                                        
                                     <div class="col-lg-12 text-left">  
                                         <hr class="mr-2">     
-                                        <p class="mb-2">Наименование товара: ' . $row_result["title"] . '</p>
-                                        <p class="mb-2">Цена: ' . $row_result["price"] . ' руб.</p>
-                                        <p class="mb-0">Количество: ' . $row_result["buy_count_product"] . '</p>                     
+                                        <p class="mb-2">Такого товара больше не существует</p>                  
                                     </div>
                                 
                                 
-                            ';
-                        } while ($row_result = mysqli_fetch_array($query_product));
+                                ';
+                        }
+                    } while ($row_result = mysqli_fetch_array($query_product));
 
-                        $query_reviews = mysqli_query($link, "SELECT * FROM orders WHERE order_id = '$id'");
 
-                        $row_reviews = mysqli_fetch_array($query_reviews);
-                        echo '
+
+                    $query_reviews = mysqli_query($link, "SELECT * FROM orders WHERE order_id = '$id'");
+
+                    $row_reviews = mysqli_fetch_array($query_reviews);
+                    echo '
                             <div class="col-lg-12 text-left"> 
                                 <hr class="mr-2">
                                 <p class="mb-2"><span class="font-weight-bold">ФИО: </span>' . $row_reviews["order_FIO"] . '</p> 
                                 <p class="mb-2"><span class="font-weight-bold">Адрес: </span>' . $row_reviews["order_address"] . '</p> 
                                 <p class="mb-2"><span class="font-weight-bold">E-mail: </span>' . $row_reviews["order_email"] . '</p> 
                                 <p class="mb-2"><span class="font-weight-bold">Телефон: </span>' . $row_reviews["order_phone"] . '</p> 
-                                '; 
+                                ';
 
-                            if($row_reviews["order_note"] != "") {
-                                echo '<p class="mb-2"><span class="font-weight-bold">Примечание: </span>' . $row_reviews["order_note"] . '</p>';
-                            }
+                    if ($row_reviews["order_note"] != "") {
+                        echo '<p class="mb-2"><span class="font-weight-bold">Примечание: </span>' . $row_reviews["order_note"] . '</p>';
+                    }
 
-                            echo ' 
+                    echo ' 
                                 <p class="mb-2"><span class="font-weight-bold">Способ доставки: </span>' . $row_reviews["order_delivery"] . '</p>
                                 <p class="mb-0"><span class="font-weight-bold">Итоговая цена: </span>' . $price . ' руб.</p>                    
                             </div>
                         </div> ';
-                        
-                    
+
+
                     ?>
 
-                
+
                 </div>
             </section>
 

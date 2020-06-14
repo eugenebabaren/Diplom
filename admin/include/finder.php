@@ -55,7 +55,7 @@
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
                         <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
-                        <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . $row["brand"] . '</label>
+                        <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . wordwrap($row["brand"], 18, "<br>") . '</label>
                       </div>
                     </a>
                   </li>
@@ -92,7 +92,7 @@
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
                         <input ' . $checked_type . ' type="checkbox" name="type[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id . '">
-                        <label class="custom-control-label" for="checkbox' .  $checkbox_id . '">' . $row["category"] . '</label>
+                        <label class="custom-control-label" for="checkbox' .  $checkbox_id . '">' . wordwrap($row["category"], 18, "<br>") . '</label>
                       </div>
                     </a>
                   </li>

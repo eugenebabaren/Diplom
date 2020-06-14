@@ -83,7 +83,14 @@ if(isset($action)) {
                                 <div class="row ml-1 pt-2">
                                     <div class="col-lg-6 text-left mt-4">
                                         <p><span class="font-weight-bold">Заказ сделан: </span>' . $row_reviews["order_datetime"] . '</p>
-                                        
+                                        ';
+                                            if($row_reviews["order_confirmed"] == 'yes') {
+                                                echo '<span class="text-success font-weight-bold">Обработан</span>';
+                                            }
+                                            else {
+                                                echo '<span class="text-danger font-weight-bold">Не обработан</span>';
+                                            }
+                                            echo '
                                     </div>';
 
                                     if($row_reviews["order_confirmed"] == 'no') {
@@ -114,8 +121,9 @@ if(isset($action)) {
 
                         
 
-                        echo '
-                                
+                        if (!empty($row_result["title"])) {
+                            echo '
+                                    
                                 <div class="col-lg-12 text-left">  
                                     <hr class="mr-2">     
                                     <p class="mb-2">Наименование товара: ' . $row_result["title"] . '</p>
@@ -124,7 +132,18 @@ if(isset($action)) {
                                 </div>
                             
                             
-                        ';
+                            ';
+                        } else {
+                            echo '
+                                        
+                                    <div class="col-lg-12 text-left">  
+                                        <hr class="mr-2">     
+                                        <p class="mb-2">Такого товара больше не существует</p>                  
+                                    </div>
+                                
+                                
+                                ';
+                        }
                     } while ($row_result = mysqli_fetch_array($query_product));
 
                     $query_reviews = mysqli_query($link, "SELECT * FROM orders WHERE order_id='$id'");

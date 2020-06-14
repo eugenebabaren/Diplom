@@ -83,7 +83,7 @@ if ($_SESSION['auth'] == 'yes_auth') {
                                                 echo '<span class="text-danger font-weight-bold">Не обработан</span>';
                                             }
                                             echo '
-                                            </p>
+                                            
                                         </div>
                                         <a href="view_my_orders.php?id=' . $row_reviews["order_id"] . '" class="ml-auto mr-3 h-75">
                                             <button class="btn btn-success">

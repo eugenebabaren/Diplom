@@ -238,7 +238,7 @@ if (isset($_POST['submitdata'])) {
         ';
 
 
-                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products AND visible='1' AND availability='1'");
 
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result);
@@ -522,19 +522,7 @@ if (isset($_POST['submitdata'])) {
                 </script>
                 ';
 
-                //удаление сообщения об успешном заказе
-                echo '
-                <script>
 
-                    function sayHi() {
-                        delete localStorage.success_order_mes;
-                        location.replace("index.php");
-                    }
-                    
-                    setTimeout(sayHi, 5000);
-
-                </script>
-                ';
 
 
                 echo '
@@ -683,43 +671,43 @@ if (isset($_POST['submitdata'])) {
                 echo '
 
             <div class="cart-progress-line container-fluid pt-1">
-        <div class="card mb-3 wow fadeIn">
-            <div class="row m-3 mt-4">
-                
-                <h5 class="font-weight-bold mr-4 ml-2 mt-2 text-success ">1. Корзина товаров</h5>
-                
-                <h5 class="mr-4 mt-2">—</h5>
-                
-                <h5 class="mr-4 mt-2">2. Контактная информация</h5>
-                
-                <h5 class="mr-4 mt-2">—</h5>
-                
-                <h5 class="mt-2">3. Подтверждение</h5>
-                
-                <a href="cart.php?action=clear" class="ml-auto">
-                    <button type="button" class="btn btn-danger mt-0">
-                        <i class="far fa-trash-alt mr-2"></i>
-                        Очистить корзину
-                    </button>
-                </a>
+            <div class="card mb-3 wow fadeIn">
+                <div class="row m-3 mt-4">
+                    
+                    <h5 class="font-weight-bold mr-4 ml-2 mt-2 text-success ">1. Корзина товаров</h5>
+                    
+                    <h5 class="mr-4 mt-2">—</h5>
+                    
+                    <h5 class="mr-4 mt-2">2. Контактная информация</h5>
+                    
+                    <h5 class="mr-4 mt-2">—</h5>
+                    
+                    <h5 class="mt-2">3. Подтверждение</h5>
+                    
+                    <a href="cart.php?action=clear" class="ml-auto">
+                        <button type="button" class="btn btn-danger mt-0">
+                            <i class="far fa-trash-alt mr-2"></i>
+                            Очистить корзину
+                        </button>
+                    </a>
+                </div>
             </div>
-        </div>
-        </div>
+            </div>
+    
+    
+        <section id="cart_section">
+    
+            <!--Grid row-->
+            <div class="row ml-auto mr-0">
+    
+                <!--Grid column-->
+                <div class="col-lg-8">
+    
+                    <!-- Card -->
+            ';
 
 
-    <section id="cart_section">
-
-        <!--Grid row-->
-        <div class="row ml-auto mr-0">
-
-            <!--Grid column-->
-            <div class="col-lg-8">
-
-                <!-- Card -->
-        ';
-
-
-                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
+                $result = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products AND visible='1' AND availability='1'");
 
                 if (mysqli_num_rows($result) > 0) {
                     $row = mysqli_fetch_array($result);
@@ -741,72 +729,72 @@ if (isset($_POST['submitdata'])) {
                         $height = intval($ratio * $ratiow);
 
                         echo '
-                            <div class="card wish-list mb-3">
-                            
-                                <button type="button" class="close ml-auto mr-3 mt-3 mb-0" aria-label="Close">
-                                <a href="cart.php?id=' . $row["cart_id"] . '&action=delete" class="text-danger">
-                                    <span aria-hidden="true">X</span>
-                                </a>
-                                </button>
-                            
-                            <div class="card-body mt-0">
-
-                            <div class="row mb-4">
-                                <div class="col-md-5 col-lg-3 col-xl-3">
-                                    <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
-                                        <img class="img-fluid w-100" src="' . $img_path . '" alt="Sample">
-                                        <a href="view_content.php?id=' . $row["products_id"] . '">
-                                            <div class="mask waves-effect waves-light">
-                                                <img class="img-fluid w-100" src="' . $img_path . '">
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
+                                <div class="card wish-list mb-3">
+                                
+                                    <button type="button" class="close ml-auto mr-3 mt-3 mb-0" aria-label="Close">
+                                    <a href="cart.php?id=' . $row["cart_id"] . '&action=delete" class="text-danger">
+                                        <span aria-hidden="true">X</span>
+                                    </a>
+                                    </button>
+                                
+                                <div class="card-body mt-0">
     
-                                <div class="col-md-7 col-lg-9 col-xl-9">
-                                    <div>
-                                        <div class="d-flex justify-content-between">
-                                            <div class="mr-3">
-                                            <a href="view_content.php?id=' . $row["products_id"] . '" class="text-dark">
-                                                <h5>' . $row["title"] . '</h5>
-                                            </a>
-                                            </div>
-                                            
-                                        </div>
-    
-                                        <div class="d-flex justify-content-between align-items-center">
-                                            
-                                        <div class="mr-5 mt-3">
-                                                <div class="def-number-input number-input safari_only mb-0 w-100">
-                                                    <button iid="' . $row["cart_id"] . '" onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown()" class="minus"></button>
-                                                    <input id="plus-minus-input-id' . $row["cart_id"] . '" iid="' . $row["cart_id"] . '" class="quantity count-input" min="1" name="quantity" value="' . $row["cart_count"] . '" type="number">
-                                                    <button iid="' . $row["cart_id"] . '" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp()" class="plus"></button>
+                                <div class="row mb-4">
+                                    <div class="col-md-5 col-lg-3 col-xl-3">
+                                        <div class="view zoom overlay z-depth-1 rounded mb-3 mb-md-0">
+                                            <img class="img-fluid w-100" src="' . $img_path . '" alt="Sample">
+                                            <a href="view_content.php?id=' . $row["products_id"] . '">
+                                                <div class="mask waves-effect waves-light">
+                                                    <img class="img-fluid w-100" src="' . $img_path . '">
                                                 </div>
+                                            </a>
+                                        </div>
+                                    </div>
+        
+                                    <div class="col-md-7 col-lg-9 col-xl-9">
+                                        <div>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="mr-3">
+                                                <a href="view_content.php?id=' . $row["products_id"] . '" class="text-dark">
+                                                    <h5>' . $row["title"] . '</h5>
+                                                </a>
+                                                </div>
+                                                
                                             </div>
-                                            <p id="tovar' . $row["cart_id"] . '" class="mb-0 mr-5 mt-3 lead"><span class="font-weight-bold mr-2" price="' . $row["cart_price"] . '">' . $int . ' руб.</span></p>
+        
+                                            <div class="d-flex justify-content-between align-items-center">
+                                                
+                                            <div class="mr-5 mt-3">
+                                                    <div class="def-number-input number-input safari_only mb-0 w-100">
+                                                        <button iid="' . $row["cart_id"] . '" onclick="this.parentNode.querySelector(\'input[type=number]\').stepDown()" class="minus"></button>
+                                                        <input id="plus-minus-input-id' . $row["cart_id"] . '" iid="' . $row["cart_id"] . '" class="quantity count-input" min="1" name="quantity" value="' . $row["cart_count"] . '" type="number">
+                                                        <button iid="' . $row["cart_id"] . '" onclick="this.parentNode.querySelector(\'input[type=number]\').stepUp()" class="plus"></button>
+                                                    </div>
+                                                </div>
+                                                <p id="tovar' . $row["cart_id"] . '" class="mb-0 mr-5 mt-3 lead"><span class="font-weight-bold mr-2" price="' . $row["cart_price"] . '">' . $int . ' руб.</span></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
+                                
+        
+                            </div>
                             </div>
                             
-    
-                        </div>
-                        </div>
-                        
-                            ';
+                                ';
                     } while ($row = mysqli_fetch_array($result));
 
                     echo '
-                    </div>
-
-
-                <div class="pl-0 col-lg-4">
-                <div class="card mb-3">
-                    <div class="card-body">
-
-                        <h4 class="font-weight-bold text-center">Итого</h4>
-
-                        <ul class="list-group list-group-flush">';
+                        </div>
+    
+    
+                    <div class="pl-0 col-lg-4">
+                    <div class="card mb-3">
+                        <div class="card-body">
+    
+                            <h4 class="font-weight-bold text-center">Итого</h4>
+    
+                            <ul class="list-group list-group-flush">';
 
                     $result2 = mysqli_query($link, "SELECT * FROM cart,products WHERE cart.cart_ip = '{$_SERVER['REMOTE_ADDR']}' AND products.products_id = cart.cart_id_products");
                     $row2 = mysqli_fetch_array($result2);
@@ -814,51 +802,50 @@ if (isset($_POST['submitdata'])) {
 
 
                         echo '
-                            <div class="row d-flex justify-content-between ml-1">
-                                    <li class="list-group-item d-flex justify-content-between align-items-left border-0 px-0 pb-0 w-50">
-                                    ' . $row2["title"] . '
-                                    </li>
-                                    <span id="tovar2' . $row2["cart_id"] . '" class="pt-3"><span class="ml-5 mt-3 mr-3" price="' . $row2["cart_price"] . '">' . $row2["cart_price"] * $row2["cart_count"] . ' руб.</span></span>
-                            </div>
-                                
-                                ';
+                                <div class="row d-flex justify-content-between ml-1">
+                                        <li class="list-group-item d-flex justify-content-between align-items-left border-0 px-0 pb-0 w-50">
+                                        ' . $row2["title"] . '
+                                        </li>
+                                        <span id="tovar2' . $row2["cart_id"] . '" class="pt-3"><span class="ml-5 mt-3 mr-3" price="' . $row2["cart_price"] . '">' . $row2["cart_price"] * $row2["cart_count"] . ' руб.</span></span>
+                                </div>
+                                    
+                                    ';
                     } while ($row2 = mysqli_fetch_array($result2));
 
 
                     echo '
-                            <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0">
-                                Доставка
-                                <span>Бесплатно</span>
-                            </li>
-                            <hr class="w-100 m-1">
-                            <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
-                                <strong class="font-weight-bold">Итого:</strong>
-                                <span class="itog_price"><strong>' . $all_price . ' руб.</strong></span>
-                            </li>
-                        </ul>
-
-                        <a href="cart.php?action=confirm" class="mr-0">
-                            <button type="button" class="btn btn-success btn-block waves-effect waves-light">Далее</button>
-                        </a>
-
+                                <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0">
+                                    Доставка
+                                    <span>Бесплатно</span>
+                                </li>
+                                <hr class="w-100 m-1">
+                                <li class="ml-1 list-group-item d-flex justify-content-between align-items-center border-0 px-0 mb-3">
+                                    <strong class="font-weight-bold">Итого:</strong>
+                                    <span class="itog_price"><strong>' . $all_price . ' руб.</strong></span>
+                                </li>
+                            </ul>
+    
+                            <a href="cart.php?action=confirm" class="mr-0">
+                                <button type="button" class="btn btn-success btn-block waves-effect waves-light">Далее</button>
+                            </a>
+    
+                        </div>
                     </div>
-                </div>
-
-                    ';
+    
+                        ';
                 } else {
                     echo '
-                    <h3 class="m-5">Корзина пуста</h3>
-                    ';
+                        <h3 class="m-5">Корзина пуста</h3>
+                        ';
                 }
 
                 echo '
-        </div>
-
-        </div>
-
-    </section>
-            
-        ';
+            </div>
+    
+            </div>
+    
+        </section>
+            ';
                 break;
         }
 
@@ -935,7 +922,25 @@ if (isset($_POST['submitdata'])) {
 
             mysqli_query($link, "TRUNCATE TABLE cart");
 
-            
+            unset($_SESSION['order_delivery']);
+            unset($_SESSION['order_fio']);
+            unset($_SESSION['order_email']);
+            unset($_SESSION['order_phone']);
+            unset($_SESSION['order_address']);
+            unset($_SESSION['order_note']);
+
+
+            //удаление сообщения об успешном заказе
+            echo '
+            <script>
+            function deleteMessage()
+            {
+                delete localStorage.success_order_mes;
+            }
+
+            setTimeout(deleteMessage, 100);
+            </script>
+            ';
         }
         ?>
 

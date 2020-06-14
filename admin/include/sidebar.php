@@ -21,7 +21,7 @@
         </a>
 
         <a href="reviews.php" class="text-dark list-group-item list-group-item-action">
-          <span class="mr-2">Отзывы</span>
+          <span class="mr-1">Отзывы</span>
           <?php
           $plus_reviews = mysqli_query($link, "SELECT * FROM reviews WHERE moderat='0'");
           $plus_reviews_result = mysqli_num_rows($plus_reviews);

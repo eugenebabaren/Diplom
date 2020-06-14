@@ -519,7 +519,7 @@ if (isset($_POST['edit_product_form_submit'])) {
 
 
                             <label data-error="wrong" data-success="right" for="title">Название товара</label>
-                            <input type="text" name="title" id="title" class="form-control mb-4 w-75" placeholder="Название товара" autocomplete="off" value="' . $row["title"] . '">
+                            <input type="text" name="title" id="title" class="form-control mb-4 w-75" placeholder="Название товара" autocomplete="off" value="' . htmlspecialchars($row["title"]) . '"/>
                             <small id="titleHelpBlock" class="form-text mb-4" hidden>
                                 At least 8 characters and 1 digit
                             </small>
@@ -648,13 +648,13 @@ if (isset($_POST['edit_product_form_submit'])) {
 
                                     echo '
                                         
-                                            <li class="col-2 list-inline-item pr-0 pl-0 mr-0 ml-0" id="del' . $result_img["id"] . '">
+                                            <li class="col-2 list-inline-item pr-0 pl-0 mr-0 ml-0 mb-4" id="del' . $result_img["id"] . '">
 
                                             <a class="del-img text-danger" img_id="' . $result_img["id"] . '">
                                                 <button type="button" class="close ml-auto mr-3" aria-label="Close">
                                                 <span aria-hidden="true">X</span>
                                             </a>
-                                            <img src="../images/' . $result_img["image"] . '" title="' . $result_img["image"] . 's" class="w-100">
+                                            <img src="../images/' . $result_img["image"] . '" title="' . $result_img["image"] . '" class="w-100">
       
                                             </li>
                                         

@@ -27,13 +27,17 @@
 
       <div class="card">
 
-        <div class="view overlay">
-          <img id="card-image" class="card-img-top" src="images/', $row["image"], '" alt="Card image cap">
-          <a href="view_content.php?id=' . $row["products_id"] . '">
-            <div class="mask rgba-white-slight"></div>
-          </a>
-          <div class="dropdown-divider"></div>
+      <div class="view overlay">
+      <div class="row mx-auto d-block">
+        <div class="col-12">
+          <img id="card-image" class="w-100 img-fluid" src="images/', $row["image"], '">
         </div>
+      </div>
+      <a href="view_content.php?id=' . $row["products_id"] . '">
+        <div class="mask rgba-white-slight"></div>
+      </a>
+      <div class="dropdown-divider"></div>
+    </div>
 
 
         <div class="card-body">

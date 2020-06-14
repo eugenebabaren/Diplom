@@ -57,7 +57,7 @@ include("include/add_reviews.php");
       <div class="card wow fadeIn d-flex mt-5 mb-3">
 
         <?php
-        $result = mysqli_query($link, "SELECT * FROM products WHERE products_id='$id' AND visible='1'");
+        $result = mysqli_query($link, "SELECT * FROM products products,brand WHERE brand.id = products.brand AND products_id='$id' AND visible='1'");
 
         if (mysqli_num_rows($result) > 0) {
           $row = mysqli_fetch_array($result);
@@ -69,6 +69,9 @@ include("include/add_reviews.php");
             <div class="col-lg-6 mt-2 text-center">
 
             <a data-fancybox="gallery" href="images/' . $row["image"] . '"><img src="images/' . $row["image"] . '" alt="First slide" class="img-fluid"></a>
+
+            <div class="row m-4">
+            
               ';
 
 
@@ -79,14 +82,16 @@ include("include/add_reviews.php");
               do {
 
                 echo '
-                  <a data-fancybox="gallery" href="images/' . $row23["image"] . '"><img src="images/' . $row23["image"] . '" alt="First slide" class="img-fluid w-25"></a>
-                  
+                <div class="col-lg-4 mt-2 text-center">
+                  <a data-fancybox="gallery" href="images/' . $row23["image"] . '"><img src="images/' . $row23["image"] . '" class="img-fluid w-50"></a>
+                  </div>
                   ';
               } while ($row23 = mysqli_fetch_array($result23));
             }
 
 
             echo '
+            </div>
             </div>
     
             <div class="col-lg-6 text-center text-md-left">
@@ -122,7 +127,7 @@ include("include/add_reviews.php");
 
                 <p class="ml-xl-0 ml-4"><span>Бренд</span><strong>..............................................................................................' . $row["brand"] . '</strong></p>
 
-                <p class="ml-xl-0 ml-4">Страна производства<strong>.......................................................' . $row["country"] . '</strong></p>
+                <p class="ml-xl-0 ml-4">Страна бренда<strong>........................................................................' . $row["country"] . '</strong></p>
     
                 <p class="ml-xl-0 ml-4">Энергетическая ценность (ккал на 100 г)<strong>......' . $row["energy_value"] . '</strong></p>
                 <p class="ml-xl-0 ml-4">Условия хранения<strong>...............................................................' . $row["storage_conditions"] . '</strong></p>

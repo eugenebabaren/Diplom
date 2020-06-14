@@ -1,8 +1,8 @@
 <div class="finder ml-3 mr-2 mb-0 justify-content-between">
   <div class="card mb-3 wow fadeIn">
-    <div class="card-body d-sm-flex">
+    <div class="row card-body d-sm-flex mr-0">
 
-      <button class="btn btn-success mb-2 ml-0" data-toggle="modal" data-target="#modalFiltForm">
+      <button class="filt-btn btn btn-success mb-2 ml-2" data-toggle="modal" data-target="#modalFiltForm">
         <i class="fas fa-filter mr-2"></i>Фильтрация
       </button>
 
@@ -11,22 +11,22 @@
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title w-100 font-weight-bold ml-3">Фильтрация</h5>
+                <h5 class="modal-title w-100 font-weight-bold">Фильтрация</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="container-fluid d-flex ml-0 mr-0 pr-0 pl-2 pt-3 pb-3">
 
-                <ul class="dropdown-ul pl-0 ml-0 mb-0 mr-0 pr-0 lead">
+                <ul class="col-6 dropdown-ul pl-0 ml-0 mb-0 mr-0 pr-0 lead">
                   <h3 class="ml-4 mt-2 pb-2 font-weight-bold">Бренд</h3>
 
                   <?php
 
                   $type = $_GET["type"];
-                 
-                    $result = mysqli_query($link, "SELECT * FROM brand");
-                  
+
+                  $result = mysqli_query($link, "SELECT * FROM brand");
+
 
 
                   if (mysqli_num_rows($result) > 0) {
@@ -48,8 +48,8 @@
                   <li>
                     <a class="dropdown-item">
                       <div class="custom-control custom-checkbox">
-                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand. '">
-                        <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . $row["brand"] . '</label>
+                        <input ' . $checked_brand . ' type="checkbox" name="brand[]" value="' . $row["id"] . '" class="custom-control-input" id="checkbox' . ++$checkbox_id_brand . '">
+                        <label class="custom-control-label" for="checkbox' . $checkbox_id_brand . '">' . wordwrap($row["brand"], 18, "<br>") . '</label>
                       </div>
                     </a>
                   </li>
@@ -61,7 +61,7 @@
 
                 </ul>
 
-                <ul class="dropdown-ul pl-0 ml-0 mb-0 mr-0 pr-0 lead">
+                <ul class="col-6 dropdown-ul pl-0 ml-0 mb-0 mr-0 pr-0 lead">
                   <h3 class="ml-4 mt-2 pb-2 font-weight-bold">Страна</h3>
                   <?php
 
@@ -115,13 +115,13 @@
 
 
       <!-- SORTING -->
-      <div>
-        <button class="btn btn-success dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-sort mr-2"></i>Сортировка
-        </button>
 
-        <?php
-        echo '
+      <button class="sort-btn btn btn-success dropdown-toggle mr-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fas fa-sort mr-2"></i>Сортировка
+      </button>
+
+      <?php
+      echo '
               <div class="dropdown-menu">
                 <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=price-asc" class="dropdown-item">Сначала дешевле</a>
                 <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=price-desc" class="dropdown-item">Сначала дороже</a>
@@ -133,18 +133,18 @@
                 <a href="view_cat.php?cat=' . $cat . '&type=' . $type . '&sort=without-sorting" class="dropdown-item btn-danger">Без сортировки</a>
               </div>
               ';
-        ?>
+      ?>
 
-      </div>
+
       <!-- SORTING -->
 
 
       <!-- SEARCH -->
-      <form method="GET" action="search.php?q=" class="form-inline d-flex ml-auto">
-        <input type="search" name="q" class="form-control" placeholder="Поиск" value="<?php echo $search; ?>">
-        <button class="btn-success ml-1 mr-0 btn-sm my-0" type="submit">
-          <i class="fas fa-search"></i>
-        </button>
+      <form method="GET" action="search.php?q=" class="search-css form-inline mr-0">
+          <input type="search" name="q" class="col-9 form-control" placeholder="Поиск" value="<?php echo $search; ?>">
+          <button class="col-2 btn-success ml-1 mr-0 btn-sm my-0" type="submit">
+            <i class="fas fa-search"></i>
+          </button>
       </form>
       <!-- SEARCH -->
       <!-- </div> -->

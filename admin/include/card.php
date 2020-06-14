@@ -25,7 +25,7 @@
 
 
         echo '
-      <div class="col mb-4 pr-auto">
+      <div class="col mb-4">
 
       <div class="card">
         <div class="row mb-3 mt-2">
@@ -39,10 +39,11 @@
         </div>
 
         <div class="view overlay">
-          <img id="card-image" class="card-img-top" src="../images/', $row["image"], '" alt="Card image cap">
-
-            <div class="mask rgba-white-slight"></div>
-
+          <div class="row mx-auto d-block">
+            <div class="col-12">
+              <img id="card-image" class="w-100 img-fluid" src="../images/', $row["image"], '">
+            </div>
+          </div>
           <div class="dropdown-divider"></div>
         </div>
 

@@ -84,8 +84,6 @@ main {
 }
 
 
-
-
 #btn_filtration {
     min-width: 174.98px;
     min-height: 45.88px;
@@ -134,17 +132,12 @@ main {
     }
 }
 
-/* @media(min-width: 988px) and (max-width: 1200px) {
-    body {
-        font-size: 0.95vw;
+
+@media(min-width: 768px) {
+    .card-img-top {
+        height: 17vw;
     }
 }
-
-@media(max-width: 1357px) and (min-width: 1200px) {
-    body {
-        font-size: 0.9vw;
-    }
-} */
 
 @media(max-width: 1226px) and (min-width: 988px) {
     body {

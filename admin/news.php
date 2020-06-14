@@ -116,7 +116,7 @@ if (isset($action)) {
 
                                             <p class="ml-xl-0 ml-5">' . $row_reviews["date"] . '</p>
 
-                                            <p class="col-lg-4 ml-xl-0 pl-0"><img class="card-img-top" src="../images/', $row_reviews["image"], '" alt="Card image cap"></p>
+                                            <p class="col-lg-4 ml-xl-0 pl-0"><img class="img-fluid" src="../images/', $row_reviews["image"], '" alt="Card image cap"></p>
 
                                             <h6 class="ml-xl-0 ml-5">' . mb_strimwidth($row_reviews["text"], 0, 300, "...", "UTF-8") . '</h6>
                                             

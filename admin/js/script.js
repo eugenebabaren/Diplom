@@ -112,7 +112,7 @@ $(document).ready(function () {
 
         count_input++;
 
-        $('<div class="custom-file mb-3" id="addimage' + count_input + '"><div class="row"><input name="MAX_FILE_SIZE" type="hidden" value="5000000"><input name="galleryimg[]" type="file" class="custom-file-input w-50 mr-2" lang="ru" accept="image/jpg,image/jpeg,image/png"><label class="custom-file-label w-50" for="galleryimg">Выберите файл</label><a rel="' + count_input + '" class="delete-input text-danger ml-3 mt-2">Удалить</a></div></div>').fadeIn(300).appendTo('#objects');
+        $('<div class="custom-file mb-3" id="addimage' + count_input + '"><div class="row"><input name="MAX_FILE_SIZE" type="hidden" value="5000000"><input name="galleryimg[]" type="file" class="custom-file-input w-75 mr-2" lang="ru" accept="image/jpg,image/jpeg,image/png"><label class="custom-file-label w-75" for="galleryimg">Выберите файл</label><a rel="' + count_input + '" class="delete-input text-danger ml-3 mt-2">Удалить</a></div></div>').fadeIn(300).appendTo('#objects');
 
     });
 
@@ -150,5 +150,7 @@ $(document).ready(function () {
 
 
     $("#admin_phone").mask("+375 (99) 999-99-99");
+
+    
 
 });
